@@ -3,8 +3,8 @@ const Models = require('../../database/models');
 const CustomerController = require('../controllers/CustomerController');
 const CustomerService = require('../services/CustomerService');
 
-const service = new CustomerService(Models.Users);
-const Controller = new CustomerController(service);
+const Service = new CustomerService(Models.Users);
+const Controller = new CustomerController(Service);
 
 const Endpoints = express.Router();
 
