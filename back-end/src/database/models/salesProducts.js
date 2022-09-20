@@ -27,5 +27,10 @@ module.exports = (sequelize) => {
     },
   );
 
+  SalesProducts.associate = (models) => {
+    models.Products.belongsToMany(models.Sales, { through: models.SalesProducts, foreignKey: "product_id" });
+    models.Sales.belongsToMany(models.Products, { through: models.SalesProducts, foreignKey: "sale_id" });
+  };
+
   return SalesProducts;
 }; 
