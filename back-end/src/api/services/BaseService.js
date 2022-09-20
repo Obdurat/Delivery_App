@@ -5,7 +5,6 @@ class BaseService {
     constructor(model) {
         this.model = model;
     }
-
     async create(body) {
         const [request, created] = await this.model.findOrCreate({
             where: { email: body.email },
@@ -26,7 +25,7 @@ class BaseService {
 
     async getOne(id) {
         const request = await this.model.findOne({where: { id }});
-        if (!request) throw new CustomError(`${this.model.tableName} does not exist`)
+        if (!request) throw new CustomError(`${this.model.tableName} does not exist`) // model tableName retorna o nome da tabela
         return request;
     }
 
@@ -39,7 +38,7 @@ class BaseService {
     async delete(id) {
         const request = await this.model.findOne({ where: { id } });
         if (!request) throw new CustomError(`${this.model.tableName} does not exist`)
-        request.destroy();
+        request.destroy(); // Usando a mesma instancia que o find trouxe para apagar ela da DB
         return ({ ...request.dataValues, status: "Deleted Sucessfully"});
     }
 }

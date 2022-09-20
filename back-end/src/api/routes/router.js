@@ -3,6 +3,8 @@ const Models = require('../../database/models');
 const CustomerController = require('../controllers/CustomerController');
 const CustomerService = require('../services/CustomerService');
 
+// Padrão de instanciar as classes nas Routas ??? Se prefirirem fazemos Factory
+
 const Service = new CustomerService(Models.Users);
 const Controller = new CustomerController(Service);
 
