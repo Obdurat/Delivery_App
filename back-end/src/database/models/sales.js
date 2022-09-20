@@ -45,7 +45,7 @@ module.exports = (sequelize) => {
       timestamps: false,
       tableName: 'Sales',
     },
-  );
+  ); 
 
   return Sales;
 };

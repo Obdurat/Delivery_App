@@ -12,11 +12,23 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       seller_id: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       total_price: {
         type: Sequelize.STRING,
