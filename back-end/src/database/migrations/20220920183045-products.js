@@ -6,16 +6,16 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
       },
       name: {
-        type: DataTypes.STRING,        
+        type: Sequelize.STRING,        
       },
       price: {
-        type: DataTypes.DECIMAL,        
+        type: Sequelize.DECIMAL,        
       },
       url_image: {
-        type: DataTypes.STRING,        
+        type: Sequelize.STRING,        
       },      
     });
   },
