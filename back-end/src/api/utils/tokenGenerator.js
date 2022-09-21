@@ -8,7 +8,7 @@ const tokenGenerator = (payload) => {
     expiresIn: '30m',
     algorithm: 'HS256',
   };
-  const token = sign({ payload }, SECRET, jwtConfig);
+  const token = sign(payload, SECRET, jwtConfig);
   return { token };
 };
 
