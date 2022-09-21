@@ -4,7 +4,7 @@ const CustomError = require('../errors/CustomError');
 
 const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
 
-const authToken = (req, res) => {
+const authToken = (req, res, next) => {
   const token = req.headers.authorization || '';
 
   if (!token) throw new CustomError('Token Not Found');
@@ -13,6 +13,7 @@ const authToken = (req, res) => {
     if (error) throw new CustomError('Invalid Token');
     res.locals.user = user;
   });
-}
+  next();
+};
 
 module.exports = authToken;
