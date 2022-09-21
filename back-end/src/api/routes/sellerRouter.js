@@ -8,7 +8,7 @@ const Controller = new SellerController(Service);
 
 const Endpoints = express.Router();
 
-Endpoints.route('/seller/orders/:id')
+Endpoints.route('/orders')
   .get(Controller.getAll);
 
 module.exports = Endpoints;
