@@ -10,7 +10,7 @@ const authToken = (req, res) => {
   if (!token) throw new CustomError('Token Not Found');
 
   verify(token, SECRET, (error, user) => {
-    if (error) throw new CustomError('Invalid Token')
+    if (error) throw new CustomError('Invalid Token');
     res.locals.user = user;
   });
 }
