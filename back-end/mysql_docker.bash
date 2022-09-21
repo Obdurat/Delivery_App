@@ -1,0 +1,1 @@
+docker run --name delivery_db -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mysql:8.0.21
