@@ -1,7 +1,7 @@
 const express = require('express');
 const { Sales } = require('../../database/models/');
-const SellerController = require('../controllers/CustomerController');
-const SellerService = require('../services/CustomerService');
+const SellerController = require('../controllers/SellerController');
+const SellerService = require('../services/SellerService');
 
 const Service = new SellerService(Sales);
 const Controller = new SellerController(Service);

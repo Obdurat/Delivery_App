@@ -11,7 +11,7 @@ class SellerService extends BaseService {
       where: { seller_id },
     });
 
-    if(!sales) throw new CustomError('Sale not found', 404);    
+    if(sales.length === 0) throw new CustomError('Sale not found', 404);    
 
     return sales;
   }

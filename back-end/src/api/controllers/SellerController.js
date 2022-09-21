@@ -1,4 +1,5 @@
 const BaseController = require('./BaseController');
+const CtrlrWrpr = require("../utils/CtrlrWrpr");
 
 class SellerController extends BaseController {
   constructor(service) {
