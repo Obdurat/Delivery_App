@@ -1,7 +1,8 @@
 const express = require('express');
 const Models = require('../../database/models');
-const CustomerController = require('../controllers/CustomerController');
+
 const CustomerService = require('../services/CustomerService');
+const CustomerController = require('../controllers/CustomerController');
 
 // Padrão de instanciar as classes nas Routas ??? Se prefirirem fazemos Factory
 
@@ -10,13 +11,18 @@ const Controller = new CustomerController(Service);
 
 const Endpoints = express.Router();
 
-Endpoints.route('/user')
+Endpoints.route('/')
     .get(Controller.getAll)
-    .post(Controller.create);
 
-Endpoints.route('/user/:id')
+Endpoints.route('/:id')
     .get(Controller.getOne)
     .put(Controller.update)
     .delete(Controller.delete);
+
+Endpoints.route('/products')
+    .get(Controller.getAll);
+
+Endpoints.route('/checkout')
+    .get(Controller.getAll);
 
 module.exports = Endpoints;
