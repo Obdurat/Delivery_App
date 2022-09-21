@@ -12,7 +12,7 @@ const Controller = new CustomerController(Service);
 const Endpoints = express.Router();
 
 Endpoints.route('/')
-    .get(Controller.getAll)
+    .get(Controller.getAll);
 
 Endpoints.route('/:id')
     .get(Controller.getOne)
@@ -20,9 +20,9 @@ Endpoints.route('/:id')
     .delete(Controller.delete);
 
 Endpoints.route('/products')
-    .get(Controller.getAll);
+    .get(() => ({ message: 'Not implemented' }));
 
 Endpoints.route('/checkout')
-    .get(Controller.getAll);
+    .get(() => ({ message: 'Not implemented' }));
 
 module.exports = Endpoints;

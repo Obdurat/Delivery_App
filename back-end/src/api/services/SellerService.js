@@ -2,13 +2,11 @@ const BaseService = require('./BaseService');
 const CustomError = require('../errors/CustomError');
 
 class SellerService extends BaseService {
-  async getAll(user_id) {
+  async getAll(userId) {
     const sales = await this.model.findAll({
-      where: { user_id },
+      where: { userId },
     });
-
-    if (sales.length === 0) throw new CustomError('No sales at the moment', 404);    
-
+    if (sales.length === 0) throw new CustomError('No sales at the moment', 404);  
     return sales;
   }
 }

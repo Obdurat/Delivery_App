@@ -1,10 +1,7 @@
 const BaseService = require('./BaseService');
 
 class RegisterService extends BaseService {
-  constructor(model) {
-    super(model);
-  }
-
-};
+  // Adione metodos aqui;
+}
 
 module.exports = RegisterService;
