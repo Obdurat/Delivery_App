@@ -11,4 +11,7 @@ const Endpoints = express.Router();
 Endpoints.route('/orders')
   .get(Controller.getAll);
 
+Endpoints.route('/orders/:id')
+  .get(Controller.getOne);
+
 module.exports = Endpoints;
