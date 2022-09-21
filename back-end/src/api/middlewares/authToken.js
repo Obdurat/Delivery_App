@@ -2,7 +2,7 @@ const { verify } = require('jsonwebtoken');
 const fs = require('fs');
 const CustomError = require('../errors/CustomError');
 
-const SECRET = fs.readFileSync('jwt.evaluation.key').trim();
+const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
 
 const authToken = (req, res) => {
   const token = req.headers.authorization || '';
