@@ -8,7 +8,6 @@ const Controller = new SellerController(Service);
 
 const Endpoints = express.Router();
 
-
 Endpoints.route('/orders')
   .get(Controller.getAll);
 
