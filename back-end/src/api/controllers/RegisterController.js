@@ -1,10 +1,7 @@
 const BaseController = require('./BaseController');
 
 class RegisterController extends BaseController {
-  constructor(service) {
-    super(service);
-  }
-
-};
+  // Motodos adicionais aqui
+}
 
 module.exports = RegisterController;
