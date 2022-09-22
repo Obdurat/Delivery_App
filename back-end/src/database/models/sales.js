@@ -16,7 +16,7 @@ const Attributes = {
   sellerId: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
     field: 'seller_id',
   },
   totalPrice: {
