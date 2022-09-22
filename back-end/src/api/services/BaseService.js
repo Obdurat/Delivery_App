@@ -14,13 +14,11 @@ class BaseService {
         const passwordEncrypted = passwordHash(body.password);
         const [request, created] = await this.model.findOrCreate({
             where: { email: body.email },
-            defaults: {...body, password: passwordEncrypted},
+            defaults: { ...body, password: passwordEncrypted },
         });
         if (!created) throw new CustomError('User allready exists', 409);        
         const payload = request.get();
         if (payload.password) { delete payload.password; }
-
-        
 
         const token = jwt.sign(payload, SECRET, { expiresIn: '365d' });
         return ({ ...payload, token });
