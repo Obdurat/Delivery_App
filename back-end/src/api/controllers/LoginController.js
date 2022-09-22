@@ -1,12 +1,12 @@
-const BaseController = require("./BaseController");
+const BaseController = require('./BaseController');
 
 class LoginController extends BaseController {
   constructor(service) {
-    super(service)
+    super(service);
 
-    this.login = this.login.bind(this)
+    this.login = this.login.bind(this);
   }
-  
+
   async login(req, res) {
     const { email, password } = req.body;
     const user = await this.service.login(email, password);
