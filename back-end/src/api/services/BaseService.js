@@ -6,6 +6,10 @@ const passwordHash = require('../utils/passwordHash');
 const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
 
 class BaseService {
+    /**
+     * @constructor
+     * @param {import('sequelize/types').ModelDefined<{}, {}>} model
+     */
     constructor(model) {
         this.model = model;
     }
@@ -15,7 +19,7 @@ class BaseService {
         const [request, created] = await this.model.findOrCreate({
             where: { email: body.email },
             defaults: { ...body, password: passwordEncrypted },
-        });
+        });        
         if (!created) throw new CustomError('User allready exists', 409);        
         const payload = request.get();
         if (payload.password) { delete payload.password; }
