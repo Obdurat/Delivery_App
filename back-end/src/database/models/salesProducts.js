@@ -2,17 +2,17 @@ const { DataTypes } = require('sequelize');
 
 const Attributes = {
   saleId: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
     type: DataTypes.INTEGER,
+    unique: false,
     field: 'sale_id',
+    primaryKey:true,
   },
   productId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     unique: false,
     field: 'product_id',
+    primaryKey:true,
   },
   quantity: {
     type: DataTypes.INTEGER,
@@ -28,11 +28,6 @@ module.exports = (sequelize) => {
       tableName: 'SalesProducts',
     },
   );
-
-  SalesProducts.associate = (models) => {
-    models.Products.belongsToMany(models.Sales, { through: models.SalesProducts, foreignKey: "product_id" });
-    models.Sales.belongsToMany(models.Products, { through: models.SalesProducts, foreignKey: "sale_id" });
-  };
 
   return SalesProducts;
 }; 
