@@ -5,7 +5,7 @@ const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
 
 const tokenGenerator = (payload) => {
   const jwtConfig = {
-    expiresIn: '30m',
+    expiresIn: '365d',
     algorithm: 'HS256',
   };
   const token = sign(payload, SECRET, jwtConfig);
