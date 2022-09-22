@@ -1,16 +1,18 @@
 const { DataTypes } = require('sequelize');
 
 const Attributes = {
-  sale_id: {
+  saleId: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
+    field: 'sale_id',
   },
-  product_id: {
+  productId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     unique: false,
+    field: 'product_id',
   },
   quantity: {
     type: DataTypes.INTEGER,

@@ -7,31 +7,37 @@ const Attributes = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  user_id: {
+  userId: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: false,
+    field: 'user_id',
   },
-  seller_id: {
+  sellerId: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
+    field: 'seller_id',
   },
-  total_price: {
+  totalPrice: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'total_price',
   },
-  delivery_adress: {
+  deliveryAdress: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'delivery_adress',
   },
-  delivery_number: {
+  deliveryNumber: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'delivery_number',
   },
-  sale_date: {
+  saleDate: {
     type: DataTypes.DATE,
     allowNull: false,
+    field: 'sale_date',
   },
   status: {
     type: DataTypes.BOOLEAN,

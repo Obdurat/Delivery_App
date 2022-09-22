@@ -17,9 +17,10 @@ const Attributes = {
     allowNull: false,
     unique: false,
   },
-  url_image: {
+  urlImage: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'url_image',
   },
 };
 
