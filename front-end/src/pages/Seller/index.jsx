@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import OrderCard from './components/OrderCard';
 import Header from '../components/Header';
+import { useAuth } from '../../context/useAuth';
+import ProviderApi from '../../services/api';
 
 export default function Seller() {
-  const [orders] = useState([{
-    id: 1,
-    userId: 1,
-    sellerId: 2,
-    totalPrice: '2.20',
-    deliveryAdress: 'street',
-    deliveryNumber: '12345',
-    saleDate: '2001-08-01T00:00:00.000Z',
-    status: 'true',
-  }]);
+  const [orders, setOrders] = useState([]);
+
+  const { user } = useAuth();
 
   useEffect(() => {
-    // Checa usuario e envia requisição para a api
-  }, [orders]);
+    if (user.token) {
+      (async () => {
+        const res = await ProviderApi.getSellerOrders(user.token);
+        if (res.success) {
+          setOrders(res.data);
+        }
+      })();
+    }
+  }, [user]);
 
   return (
     <>
@@ -24,7 +26,7 @@ export default function Seller() {
         desc="Pedidos"
         username="fulano"
       />
-      {orders.map((order) => (
+      {orders?.map((order) => (
         <OrderCard
           key={ order.id }
           order={ order }

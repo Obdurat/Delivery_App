@@ -1,16 +1,34 @@
-import axios from 'axios';
+import { statusCode } from '../utils/constants';
+import request from './core';
 
-const URL = 'http://localhost:3001';
+const getSellerOrders = async (token) => {
+  const res = await request('/seller/orders', statusCode.OK, 'get', {
+    headers: {
+      Authorization: token,
+    },
+  });
 
-const reqSellerOrders = async () => {
-  try {
-    const { data } = await axios.get(`${URL}/seller/orders`);
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
+  return res;
 };
 
-export default {
-  reqSellerOrders,
+const login = async (data) => {
+  const res = await request('/login', statusCode.OK, 'post', {
+    body: data,
+  });
+  return res;
 };
+
+const register = async (data) => {
+  const res = await request('/register', statusCode.CREATED, 'post', {
+    body: data,
+  });
+  return res;
+};
+
+const ProviderApi = {
+  getSellerOrders,
+  login,
+  register,
+};
+
+export default ProviderApi;
