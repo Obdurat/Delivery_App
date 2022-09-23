@@ -12,11 +12,10 @@ class CustomerService extends BaseService {
 
     //   assim como no controller metodos adicionais virão aqui
     async createSale(userId, { sale, products }) {
-        const status = false;
         const saleDate = Date.now();
-        const createdSale = await this.assct.sales.create({ ...sale, userId, saleDate, status });
+        const createdSale = await this.assct.sales.create({ ...sale, userId, saleDate });
         const record = await this.assct.salesProducts
-            .bulkCreate(products.map(({ productId, quantity }) => ({ 
+            .bulkCreate(products.map(({ productId, quantity }) => ({
                 saleId: createdSale.get().id,
                 productId,
                 quantity,
