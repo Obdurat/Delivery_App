@@ -11,7 +11,7 @@ async function request(
   const { body, headers } = data;
 
   const Api = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3001',
     headers,
   });
 

@@ -24,6 +24,7 @@ const Attributes = {
   role: {
     type: DataTypes.STRING,
     allowNull: false,
+    defaultValue: "customer",
   }
 };
 

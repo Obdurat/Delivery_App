@@ -3,6 +3,8 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
+import ProviderApi from '../../services/api';
+import { useAuth } from '../../context/useAuth';
 
 const SIX = 6;
 const validationSchema = Yup.object().shape({
@@ -15,10 +17,17 @@ export default function Login() {
     mode: 'onChange',
     resolver: yupResolver(validationSchema),
   });
+
+  const { setUser } = useAuth();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const res = await ProviderApi.login(data);
+
+    if (res.success) {
+      setUser(res.data);
+      navigate('/seller/orders');
+    }
   };
 
   return (

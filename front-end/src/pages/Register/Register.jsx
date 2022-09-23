@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
+import ProviderApi from '../../services/api';
 
 const SIX = 6;
 
@@ -24,8 +25,9 @@ export default function Register() {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const res = await ProviderApi.register(data);
+    console.log(res);
   };
 
   return (
