@@ -4,7 +4,6 @@ class CustomerService extends BaseService {
     /**
      * @constructor
      * @param {import('sequelize/types').ModelDefined<{}, {}>} model
-     * @param {import('sequelize').Sequelize} association 
      */
     constructor(model, assct) {
         super(model);        
@@ -15,8 +14,8 @@ class CustomerService extends BaseService {
     async createSale(userId, { sale, products }) {
         const status = false;
         const saleDate = Date.now();
-        const createdSale = await this.assct.Sales.create({ ...sale, userId, saleDate, status });
-        const record = await this.assct.SalesProducts
+        const createdSale = await this.assct.sales.create({ ...sale, userId, saleDate, status });
+        const record = await this.assct.salesProducts
             .bulkCreate(products.map(({ productId, quantity }) => ({ 
                 saleId: createdSale.get().id,
                 productId,
