@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import OrderCard from './components/OrderCard';
+import Header from '../../components/Header';
 
 export default function Seller() {
   const [orders] = useState([{
@@ -19,7 +20,10 @@ export default function Seller() {
 
   return (
     <>
-      <h2 data-testid="customer_products__element-navbar-link-orders">Pedidos</h2>
+      <Header
+        desc="Pedidos"
+        username="fulano"
+      />
       {orders.map((order) => (
         <OrderCard
           key={ order.id }
