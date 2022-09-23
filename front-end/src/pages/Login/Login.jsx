@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import ProviderApi from '../../services/api';
 import { useAuth } from '../../context/useAuth';
+import { statusCode } from '../../utils/constants';
 
 const SIX = 6;
 const validationSchema = Yup.object().shape({
@@ -18,15 +19,29 @@ export default function Login() {
     resolver: yupResolver(validationSchema),
   });
 
+  const [errorEmail, setErrorEmail] = useState('');
+
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     const res = await ProviderApi.login(data);
 
+    if (res.code === statusCode.NOT_FOUND) {
+      setErrorEmail('Usuário não existe');
+    }
+
     if (res.success) {
       setUser(res.data);
-      navigate('/seller/orders');
+      const { role } = res.data.user;
+
+      const redirectOptions = {
+        administrator: '/admin/manage',
+        seller: '/seller/orders',
+        customer: '/customer/products',
+      };
+
+      navigate(redirectOptions[role]);
     }
   };
 
@@ -49,10 +64,9 @@ export default function Login() {
             { ...register('email') }
             data-testid="common_login__input-email"
           />
-          {errors.email?.message && (
+          {(errorEmail) && (
             <div data-testid="common_login__element-invalid-email">
-              {errors.email.message}
-
+              {errorEmail}
             </div>
           )}
         </label>

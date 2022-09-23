@@ -27,7 +27,9 @@ export default function Register() {
 
   const onSubmit = async (data) => {
     const res = await ProviderApi.register(data);
-    console.log(res);
+    if (res.success) {
+      navigate('/customer/products');
+    }
   };
 
   return (
