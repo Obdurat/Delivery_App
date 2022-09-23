@@ -17,17 +17,18 @@ const Attributes = {
     allowNull: false,
     unique: false,
   },
-  url_image: {
+  urlImage: {
     type: DataTypes.STRING,
     allowNull: false,
+    field: 'url_image',
   },
 };
 
 module.exports = (sequelize) => {
-  const Products = sequelize.define('Products', Attributes, {
+  const Products = sequelize.define('products', Attributes, {
       underscore: true,
       timestamps: false,
-      tableName: 'Products',
+      tableName: 'products',
     },
   );
 

@@ -10,7 +10,7 @@ const Attributes = {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: false,
+    unique: true,
   },
   email: {
     type: DataTypes.STRING,
@@ -28,17 +28,12 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const Users = sequelize.define('Users', Attributes, {
+  const Users = sequelize.define('users', Attributes, {
       underscore: true,
       timestamps: false,
-      tableName: 'Users',
+      tableName: 'users',
     },
   );
-
-  Users.associate = (models) => {
-    Users.hasMany(models.Sales, { foreignKey: 'user_id' });
-    Users.hasMany(models.Sales, { foreignKey: 'seller_id' });
-  };
 
   return Users;
 };
