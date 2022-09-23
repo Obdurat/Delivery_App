@@ -8,8 +8,8 @@ class CustomerController extends BaseController {
 
     // Metodos Adicionais vem na sub-classe aqui
     async createSale(req, res) {
-        const { id } = req.params;
-        const request = await this.service.createSale(id, req.body);
+        const { user } = req;
+        const request = await this.service.createSale(user.id, req.body);
         return res.status(201).json(request);
     }  
 }

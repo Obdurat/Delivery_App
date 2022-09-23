@@ -6,7 +6,7 @@ const customerValidation = require('../middlewares/customerValidation');
 
 // Padrão de instanciar as classes nas Routas ??? Se prefirirem fazemos Factory
 
-const Service = new CustomerService(Models.Users);
+const Service = new CustomerService(Models.users);
 const Controller = new CustomerController(Service);
 
 const Endpoints = express.Router();

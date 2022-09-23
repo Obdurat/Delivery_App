@@ -22,10 +22,10 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const SalesProducts = sequelize.define('SalesProducts', Attributes, {
+  const SalesProducts = sequelize.define('salesProducts', Attributes, {
       underscore: true,
       timestamps: false,
-      tableName: 'SalesProducts',
+      tableName: 'salesProducts',
     },
   );
 

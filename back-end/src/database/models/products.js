@@ -25,10 +25,10 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const Products = sequelize.define('Products', Attributes, {
+  const Products = sequelize.define('products', Attributes, {
       underscore: true,
       timestamps: false,
-      tableName: 'Products',
+      tableName: 'products',
     },
   );
 
