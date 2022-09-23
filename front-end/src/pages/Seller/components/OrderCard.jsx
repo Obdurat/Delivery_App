@@ -11,28 +11,28 @@ export default function OrderCard({ order: {
   deliveryAdress,
 } }) {
   return (
-    <Card>
+    <Card.Group>
       <Card.Content
-        header={ `Pedido ${deliveryNumber}` }
+        description={ `Pedido ${deliveryNumber}` }
         data-testid={ `seller_orders__element-order-id-${id}` }
       />
       <Card.Content
-        header={ status }
+        description={ status }
         data-testid={ `seller_orders__element-delivery-status-${id}` }
       />
       <Card.Content
-        header={ saleDate }
+        description={ saleDate }
         data-testid={ `seller_orders__element-order-date-${id}` }
       />
       <Card.Content
-        header={ totalPrice }
+        description={ totalPrice }
         data-testid={ `seller_orders__element-card-price-${id}` }
       />
       <Card.Content
-        header={ deliveryAdress }
+        description={ deliveryAdress }
         data-testid={ `seller_orders__element-card-address-${id}` }
       />
-    </Card>
+    </Card.Group>
   );
 }
 
