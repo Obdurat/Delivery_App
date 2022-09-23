@@ -12,7 +12,7 @@ class LoginService extends BaseService {
     const { password, ...rest } = user.get();
     const token = tokenGenerator(rest);
 
-    return ({ token, user: rest });
+    return ({ user: rest, ...token });
   }
 }
 

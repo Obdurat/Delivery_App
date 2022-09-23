@@ -40,8 +40,9 @@ const Attributes = {
     field: 'sale_date',
   },
   status: {
-    type: DataTypes.BOOLEAN,
+    type: DataTypes.STRING,
     allowNull: false,
+    defaultValue: 'PENDENTE'
   }
 };
 
