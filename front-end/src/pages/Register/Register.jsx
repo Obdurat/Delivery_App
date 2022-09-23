@@ -5,16 +5,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 
 const SIX = 6;
+
 const validationSchema = Yup.object().shape({
+  name: Yup.string().min(SIX * 2).required('Required'),
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().required().min(SIX).required('Required'),
 });
-export default function Login() {
+export default function Register() {
   const { handleSubmit,
-    register, formState: { isValid, errors, isDirty } } = useForm({
+    register, formState: {
+      isValid,
+      errors,
+      isDirty },
+  } = useForm({
     mode: 'onChange',
     resolver: yupResolver(validationSchema),
   });
+
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -34,14 +41,27 @@ export default function Login() {
         } }
         onSubmit={ handleSubmit(onSubmit) }
       >
+        <label htmlFor="name">
+          Name
+          <input
+            { ...register('name') }
+            data-testid="common_register__input-name"
+          />
+          {errors.name?.message && (
+            <div data-testid="common_register__element-invalid-name">
+              {errors.name.message}
+
+            </div>
+          )}
+        </label>
         <label htmlFor="email">
           Email
           <input
             { ...register('email') }
-            data-testid="common_login__input-email"
+            data-testid="common_register__input-email"
           />
           {errors.email?.message && (
-            <div data-testid="common_login__element-invalid-email">
+            <div data-testid="common_register__element-invalid-email">
               {errors.email.message}
 
             </div>
@@ -52,28 +72,23 @@ export default function Login() {
           <input
             type="password"
             { ...register('password') }
-            data-testid="common_login__input-password"
+            data-testid="common_register__input-password"
           />
           {errors.password?.message && (
-            <div data-testid="common_login__element-invalid-email">
+            <div data-testid="common_register__element-invalid-email">
               {errors.password.message}
-
             </div>
           )}
         </label>
         <button
           disabled={ !isDirty || !isValid }
           type="submit"
-          data-testid="common_login__button-login"
+          data-testid="common_register__button-register"
         >
-          Login
+          register
         </button>
-        <button
-          type="button"
-          onClick={ () => navigate('/register') }
-          data-testid="common_login__button-register"
-        >
-          Ainda não tenho conta
+        <button type="button" onClick={ () => navigate('/login') }>
+          ja tenho conta
         </button>
       </form>
     </div>

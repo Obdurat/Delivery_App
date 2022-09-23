@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import Login from '../pages/Login/Login';
+import Register from '../pages/Register/Register';
 import PrivateRoute from './privateRoute';
 
 function Routes() {
@@ -12,6 +13,10 @@ function Routes() {
     {
       path: '/',
       element: <PrivateRoute isAuthorized={ false } />,
+    },
+    {
+      path: '/register',
+      element: <Register />,
     },
   ]);
 

@@ -1,15 +1,18 @@
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useAuth } from '../context/useAuth';
 
-function PrivateRoute({ children, isAuthorized }) {
+function PrivateRoute({ children }) {
+  const { loggedIn } = useAuth();
+
+  console.log(loggedIn);
   return (
-    isAuthorized ? children : <Navigate replace to="/login" />
+    loggedIn ? children : <Navigate replace to="/login" />
   );
 }
 
 PrivateRoute.propTypes = {
   children: PropTypes.node,
-  isAuthorized: PropTypes.bool.isRequired,
 };
 
 PrivateRoute.defaultProps = {
