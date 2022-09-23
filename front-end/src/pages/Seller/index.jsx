@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import OrderCard from './components/OrderCard';
-import Header from '../../components/Header';
+import Header from '../components/Header';
 
 export default function Seller() {
   const [orders] = useState([{
