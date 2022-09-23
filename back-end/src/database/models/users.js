@@ -28,10 +28,10 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const Users = sequelize.define('Users', Attributes, {
+  const Users = sequelize.define('users', Attributes, {
       underscore: true,
       timestamps: false,
-      tableName: 'Users',
+      tableName: 'users',
     },
   );
 
