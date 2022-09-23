@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import OrderCard from './components/OrderCard';
 
 const Seller = () => {
   const [orders, setOrders] = useState([{
@@ -9,16 +10,22 @@ const Seller = () => {
     deliveryAdress: "street",
     deliveryNumber: "12345",
     saleDate: "2001-08-01T00:00:00.000Z",
-    status: true,
+    status: 'true',
   }]);
 
   useEffect(() => {
-   // Checa usuario e envia requisição para a api
+    // Checa usuario e envia requisição para a api
   }, [orders]);
 
   return (
     <>
-      {orders.map()}
+      <h2 data-testid="customer_products__element-navbar-link-orders">Pedidos</h2>
+      {orders.map((order) => (
+        <OrderCard
+          key={order.id}
+          order={order}
+        />
+      ))}
     </>
   );
 };
