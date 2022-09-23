@@ -11,6 +11,6 @@ const reqSellerOrders = async () => {
   }
 };
 
-export {
+export default {
   reqSellerOrders,
 };
