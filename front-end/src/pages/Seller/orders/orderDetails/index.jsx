@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuth } from '../../../../context/useAuth';
+import ProviderApi from '../../../../services/api';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState({});
@@ -10,7 +12,7 @@ export default function OrderDetails() {
   useEffect(() => {
     if (user.token) {
       (async () => {
-        const res = await ProviderApi.getSellerOrders(id);
+        const res = await ProviderApi.getOrderById(user.token, id);
         if (res.success) {
           setOrder(res.data);
         }
@@ -19,7 +21,8 @@ export default function OrderDetails() {
   }, [user, id]);
 
   return (
-    <>
-    </>
+    <div>
+      {order?.id}
+    </div>
   );
 };

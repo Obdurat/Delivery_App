@@ -2,7 +2,8 @@ import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
-import Seller from '../pages/Seller';
+import Seller from '../pages/Seller/orders';
+import OrderDetails from '../pages/Seller/orders/orderDetails';
 import PrivateRoute from './privateRoute';
 
 function Routes() {
@@ -22,6 +23,10 @@ function Routes() {
     {
       path: '/seller/orders',
       element: <Seller />,
+    },
+    {
+      path: '/seller/orders/:id',
+      element: <OrderDetails />,
     },
   ]);
 
