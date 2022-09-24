@@ -52,7 +52,7 @@ module.exports = (sequelize) => {
       timestamps: false,
       tableName: 'sales',
     },
-  ); 
+  );
 
   return Sales;
 };

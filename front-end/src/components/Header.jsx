@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/useAuth';
+import { useAuth } from '../context/useAuth';
 
 export default function Header({ desc }) {
   const { user, setUser } = useAuth();
