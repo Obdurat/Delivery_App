@@ -10,14 +10,14 @@ export default function OrderCard({ order: {
   totalPrice,
   deliveryAdress,
 } }) {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const redirect = () => { 
+  const redirect = () => {
     navigate(`/seller/orders/${id}`);
-  }
+  };
 
   return (
-    <div onClick={ redirect }>
+    <div onClick={ redirect } aria-hidden="true">
       <div
         data-testid={ `seller_orders__element-order-id-${id}` }
       >

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../../../context/useAuth';
 import ProviderApi from '../../../../services/api';
@@ -8,6 +7,7 @@ import DetailsCard from '../components/DetailsCard';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState({});
+  console.log('🚀 ~ file: index.jsx ~ line 11 ~ OrderDetails ~ order', order);
 
   const { id } = useParams();
   const { user } = useAuth();
@@ -25,22 +25,8 @@ export default function OrderDetails() {
 
   return (
     <>
-    <Header
-      desc="Pedidos"
-    />
-    {order &&
-      <DetailsCard
-        key={ order.id }
-        details={ order }
-      />
-    }
-  </>
+      <Header desc="Pedidos" />
+      { order && <DetailsCard key={ order.id } details={ order } /> }
+    </>
   );
-};
-
-OrderCard.propTypes = {
-  id: PropTypes.number,
-  deliveryNumber: PropTypes.string,
-  status: PropTypes.string,
-  saleDate: PropTypes.string,
-}.isRequired;
+}

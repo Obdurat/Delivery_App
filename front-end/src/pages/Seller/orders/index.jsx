@@ -12,7 +12,7 @@ export default function Seller() {
   useEffect(() => {
     if (user.token) {
       (async () => {
-        const { data, success} = await ProviderApi.getSellerOrders(user.token);
+        const { data, success } = await ProviderApi.getSellerOrders(user.token);
         if (success) {
           setOrders(data);
         }
@@ -22,9 +22,7 @@ export default function Seller() {
 
   return (
     <>
-      <Header
-        desc="Pedidos"
-      />
+      <Header desc="Pedidos" />
       {orders?.map((order) => (
         <OrderCard
           key={ order.id }
