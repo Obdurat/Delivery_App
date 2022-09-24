@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'semantic-ui-react'; // https://react.semantic-ui.com/
 
 export default function OrderCard({ order: {
   id,
@@ -11,28 +10,33 @@ export default function OrderCard({ order: {
   deliveryAdress,
 } }) {
   return (
-    <Card.Group>
-      <Card.Content
-        description={ `Pedido ${deliveryNumber}` }
+    <>
+      <span
         data-testid={ `seller_orders__element-order-id-${id}` }
-      />
-      <Card.Content
-        description={ status }
+      >
+        { `Pedido ${deliveryNumber}` }
+      </span>
+      <span
         data-testid={ `seller_orders__element-delivery-status-${id}` }
-      />
-      <Card.Content
-        description={ saleDate }
+      >
+        { status }
+      </span>
+      <span
         data-testid={ `seller_orders__element-order-date-${id}` }
-      />
-      <Card.Content
-        description={ totalPrice }
+      >
+        { saleDate }
+      </span>
+      <span
         data-testid={ `seller_orders__element-card-price-${id}` }
-      />
-      <Card.Content
-        description={ deliveryAdress }
+      >
+        { totalPrice }
+      </span>
+      <span
         data-testid={ `seller_orders__element-card-address-${id}` }
-      />
-    </Card.Group>
+      >
+        { deliveryAdress }
+      </span>
+    </>
   );
 }
 

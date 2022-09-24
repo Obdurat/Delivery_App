@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import OrderCard from './components/OrderCard';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import { useAuth } from '../../context/useAuth';
 import ProviderApi from '../../services/api';
 
@@ -24,7 +24,6 @@ export default function Seller() {
     <>
       <Header
         desc="Pedidos"
-        username="fulano"
       />
       {orders?.map((order) => (
         <OrderCard
