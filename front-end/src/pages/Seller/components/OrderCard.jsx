@@ -11,31 +11,31 @@ export default function OrderCard({ order: {
 } }) {
   return (
     <>
-      <span
+      <div
         data-testid={ `seller_orders__element-order-id-${id}` }
       >
         { `Pedido ${deliveryNumber}` }
-      </span>
-      <span
+      </div>
+      <div
         data-testid={ `seller_orders__element-delivery-status-${id}` }
       >
         { status }
-      </span>
-      <span
+      </div>
+      <div
         data-testid={ `seller_orders__element-order-date-${id}` }
       >
         { saleDate }
-      </span>
-      <span
+      </div>
+      <div
         data-testid={ `seller_orders__element-card-price-${id}` }
       >
         { totalPrice }
-      </span>
-      <span
+      </div>
+      <div
         data-testid={ `seller_orders__element-card-address-${id}` }
       >
         { deliveryAdress }
-      </span>
+      </div>
     </>
   );
 }
