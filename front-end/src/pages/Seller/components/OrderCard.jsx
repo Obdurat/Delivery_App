@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 export default function OrderCard({ order: {
   id,
@@ -9,8 +10,14 @@ export default function OrderCard({ order: {
   totalPrice,
   deliveryAdress,
 } }) {
+  const navigate = useNavigate(); 
+
+  const redirect = () =>{ 
+    navigate(`/seller/orders/${id}`);
+  }
+
   return (
-    <>
+    <div onClick={ redirect }>
       <div
         data-testid={ `seller_orders__element-order-id-${id}` }
       >
@@ -36,7 +43,7 @@ export default function OrderCard({ order: {
       >
         { deliveryAdress }
       </div>
-    </>
+    </div>
   );
 }
 
