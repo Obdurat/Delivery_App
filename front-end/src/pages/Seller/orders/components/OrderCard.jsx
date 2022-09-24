@@ -12,7 +12,7 @@ export default function OrderCard({ order: {
 } }) {
   const navigate = useNavigate(); 
 
-  const redirect = () =>{ 
+  const redirect = () => { 
     navigate(`/seller/orders/${id}`);
   }
 
