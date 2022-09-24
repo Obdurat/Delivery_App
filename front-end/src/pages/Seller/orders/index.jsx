@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import OrderCard from './components/OrderCard';
-import Header from '../../components/Header';
-import { useAuth } from '../../context/useAuth';
-import ProviderApi from '../../services/api';
+import Header from '../../../components/Header';
+import { useAuth } from '../../../context/useAuth';
+import ProviderApi from '../../../services/api';
 
 export default function Seller() {
   const [orders, setOrders] = useState([]);
