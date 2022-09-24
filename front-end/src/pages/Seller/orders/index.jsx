@@ -12,9 +12,9 @@ export default function Seller() {
   useEffect(() => {
     if (user.token) {
       (async () => {
-        const res = await ProviderApi.getSellerOrders(user.token);
-        if (res.success) {
-          setOrders(res.data);
+        const { data, success} = await ProviderApi.getSellerOrders(user.token);
+        if (success) {
+          setOrders(data);
         }
       })();
     }

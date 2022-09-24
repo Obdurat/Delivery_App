@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../../../context/useAuth';
 import ProviderApi from '../../../../services/api';
@@ -14,9 +15,9 @@ export default function OrderDetails() {
   useEffect(() => {
     if (user.token) {
       (async () => {
-        const res = await ProviderApi.getOrderById(user.token, id);
-        if (res.success) {
-          setOrder(res.data);
+        const { data, success } = await ProviderApi.getOrderById(user.token, id);
+        if (success) {
+          setOrder(data);
         }
       })();
     }
@@ -36,3 +37,10 @@ export default function OrderDetails() {
   </>
   );
 };
+
+OrderCard.propTypes = {
+  id: PropTypes.number,
+  deliveryNumber: PropTypes.string,
+  status: PropTypes.string,
+  saleDate: PropTypes.string,
+}.isRequired;
