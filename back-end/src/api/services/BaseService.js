@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+const path = require('path');
 const CustomError = require('../errors/CustomError');
 const passwordHash = require('../utils/passwordHash');
 
+path.resolve('../../jwt.evaluation.key');
 const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
 
 class BaseService {

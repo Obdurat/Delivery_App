@@ -67,7 +67,6 @@ export default function Register() {
           {errors.email?.message && (
             <div data-testid="common_register__element-invalid-email">
               {errors.email.message}
-
             </div>
           )}
         </label>
@@ -94,6 +93,12 @@ export default function Register() {
         <button type="button" onClick={ () => navigate('/login') }>
           ja tenho conta
         </button>
+        <div
+          data-testid="common_register__element-invalid_register"
+          style={ { visibility: (!isValid ? 'hidden' : 'visible') } }
+        >
+          Registro Invalido
+        </div>
       </form>
     </div>
   );
