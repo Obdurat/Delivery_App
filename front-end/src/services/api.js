@@ -25,10 +25,20 @@ const register = async (data) => {
   return res;
 };
 
+const getProducts = async (token) => {
+  const res = await request('/products', statusCode.OK, 'post', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
 const ProviderApi = {
   getSellerOrders,
   login,
   register,
+  getProducts,
 };
 
 export default ProviderApi;
