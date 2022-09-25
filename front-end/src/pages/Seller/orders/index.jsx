@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import OrderCard from './components/OrderCard';
-import Header from '../components/Header';
-import { useAuth } from '../../context/useAuth';
-import ProviderApi from '../../services/api';
+import Header from '../../../components/Header';
+import { useAuth } from '../../../context/useAuth';
+import ProviderApi from '../../../services/api';
 
 export default function Seller() {
   const [orders, setOrders] = useState([]);
@@ -12,9 +12,9 @@ export default function Seller() {
   useEffect(() => {
     if (user.token) {
       (async () => {
-        const res = await ProviderApi.getSellerOrders(user.token);
-        if (res.success) {
-          setOrders(res.data);
+        const { data, success } = await ProviderApi.getSellerOrders(user.token);
+        if (success) {
+          setOrders(data);
         }
       })();
     }
@@ -22,10 +22,7 @@ export default function Seller() {
 
   return (
     <>
-      <Header
-        desc="Pedidos"
-        username="fulano"
-      />
+      <Header desc="Pedidos" />
       {orders?.map((order) => (
         <OrderCard
           key={ order.id }

@@ -1,14 +1,24 @@
 const BaseService = require('./BaseService');
 const CustomError = require('../errors/CustomError');
+const Models = require('../../database/models');
 
 class SellerService extends BaseService {
   async getAll(userId) {
     const sales = await this.model.findAll({
       where: { userId },
     });    
-    if (sales.length === 0) throw new CustomError('No sales at the moment', 404);  
+    if (sales.length === 0) throw new CustomError([], 404);  
     return sales;
   }
+
+  async getOne(id) {
+    const request = await this.model.findOne({
+      where: { id },
+      include: [{ model: Models.products, as: 'products' }],
+    });
+    if (!request) throw new CustomError([], 404);
+    return request;
+}
 }
 
 module.exports = SellerService;

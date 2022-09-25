@@ -1,6 +1,9 @@
 const { verify } = require('jsonwebtoken');
 const fs = require('fs');
+const path = require('path');
 const CustomError = require('../errors/CustomError');
+
+path.resolve('/jwt.evaluation.key');
 
 const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
 

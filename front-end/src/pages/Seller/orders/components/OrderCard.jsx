@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'semantic-ui-react'; // https://react.semantic-ui.com/
+import { useNavigate } from 'react-router-dom';
 
 export default function OrderCard({ order: {
   id,
@@ -10,29 +10,40 @@ export default function OrderCard({ order: {
   totalPrice,
   deliveryAdress,
 } }) {
+  const navigate = useNavigate();
+
+  const redirect = () => {
+    navigate(`/seller/orders/${id}`);
+  };
+
   return (
-    <Card.Group>
-      <Card.Content
-        description={ `Pedido ${deliveryNumber}` }
+    <div onClick={ redirect } aria-hidden="true">
+      <div
         data-testid={ `seller_orders__element-order-id-${id}` }
-      />
-      <Card.Content
-        description={ status }
+      >
+        { `Pedido ${deliveryNumber}` }
+      </div>
+      <div
         data-testid={ `seller_orders__element-delivery-status-${id}` }
-      />
-      <Card.Content
-        description={ saleDate }
+      >
+        { status }
+      </div>
+      <div
         data-testid={ `seller_orders__element-order-date-${id}` }
-      />
-      <Card.Content
-        description={ totalPrice }
+      >
+        { saleDate }
+      </div>
+      <div
         data-testid={ `seller_orders__element-card-price-${id}` }
-      />
-      <Card.Content
-        description={ deliveryAdress }
+      >
+        { totalPrice }
+      </div>
+      <div
         data-testid={ `seller_orders__element-card-address-${id}` }
-      />
-    </Card.Group>
+      >
+        { deliveryAdress }
+      </div>
+    </div>
   );
 }
 
