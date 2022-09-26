@@ -50,7 +50,10 @@ export default function ProductCard({ product }) {
         />
         <button
           type="button"
-          onClick={ () => addItemToCart(product) }
+          onClick={ () => {
+            addItemToCart(product);
+            editItemQuantity(product, `${(quantity + 1)}`);
+          } }
           data-testid={ `customer_products__button-card-add-item-${id}` }
         >
           +

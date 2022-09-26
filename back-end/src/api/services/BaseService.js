@@ -1,10 +1,6 @@
-const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
 const CustomError = require('../errors/CustomError');
 const passwordHash = require('../utils/passwordHash');
-
-const SECRET = fs.readFileSync(path.resolve('./back-end/jwt.evaluation.key'), 'utf8').trim();
+const tokenGenerator = require('../utils/tokenGenerator');
 
 class BaseService {
     /**
@@ -25,7 +21,7 @@ class BaseService {
         const payload = request.get();
         if (payload.password) { delete payload.password; }
 
-        const token = jwt.sign(payload, SECRET, { expiresIn: '365d' });
+        const token = tokenGenerator(payload);
         return ({ ...payload, token });
     }
 
