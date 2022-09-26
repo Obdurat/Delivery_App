@@ -25,7 +25,7 @@ export default function Products() {
         <button
           type="button"
           style={ { position: 'fixed', bottom: '0', right: '0' } }
-          data-testid="customer_products__button-cart"
+          data-testid="customer_products__checkout-bottom-value"
           disabled={ !total }
         >
           {String(total)?.replace(/\./, ',')}
