@@ -4,8 +4,7 @@ const path = require('path');
 const CustomError = require('../errors/CustomError');
 const passwordHash = require('../utils/passwordHash');
 
-path.resolve('../../jwt.evaluation.key');
-const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
+const SECRET = fs.readFileSync(path.resolve('./back-end/jwt.evaluation.key'), 'utf8').trim();
 
 class BaseService {
     /**

@@ -2,9 +2,7 @@ const { sign } = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
 
-path.resolve('/back-end/src/jwt.evaluation.key');
-
-const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
+const SECRET = fs.readFileSync(path.resolve('./back-end/jwt.evaluation.key'), 'utf8').trim();
 
 const tokenGenerator = (payload) => {
   const jwtConfig = {
