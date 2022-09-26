@@ -1,24 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 
-export default function Header({ desc }) {
+export default function Header() {
   const { user, setUser } = useAuth();
 
   const navigate = useNavigate();
 
   return (
     <>
-      <section
+      <button
+        type="button"
         data-testid="customer_products__element-navbar-link-orders"
       >
-        {desc}
-      </section>
+
+        Meus pedidos
+      </button>
+      <button
+        type="button"
+        data-testid="customer_products__element-navbar-link-products"
+      >
+        Produtos
+      </button>
+
       <section
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        {user.user.name}
+        {user.user?.name}
       </section>
       <button
         data-testid="customer_products__element-navbar-link-logout"
@@ -33,8 +41,3 @@ export default function Header({ desc }) {
     </>
   );
 }
-
-Header.propTypes = {
-  desc: PropTypes.string,
-  username: PropTypes.string,
-}.isRequired;

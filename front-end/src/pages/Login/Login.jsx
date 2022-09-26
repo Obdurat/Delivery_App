@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import ProviderApi from '../../services/api';
 import { useAuth } from '../../context/useAuth';
 import { statusCode } from '../../utils/constants';
+import { removeUser, saveUser } from '../../utils/localStorage';
 
 const SIX = 6;
 const validationSchema = Yup.object().shape({
@@ -24,6 +25,10 @@ export default function Login() {
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    removeUser();
+  }, []);
+
   const onSubmit = async (data) => {
     const res = await ProviderApi.login(data);
 
@@ -40,6 +45,13 @@ export default function Login() {
         seller: '/seller/orders',
         customer: '/customer/products',
       };
+
+      saveUser({
+        name: res.data.user.name,
+        email: res.data.user.email,
+        role,
+        token: res.data.token,
+      });
 
       navigate(redirectOptions[role]);
     }
