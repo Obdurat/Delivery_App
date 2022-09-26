@@ -2,6 +2,7 @@ import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import Login from '../pages/Login/Login';
 import Products from '../pages/Product';
+import Checkout from '../pages/Product/Checkout';
 import Register from '../pages/Register/Register';
 import Seller from '../pages/Seller/orders';
 import OrderDetails from '../pages/Seller/orders/orderDetails';
@@ -29,10 +30,10 @@ function Routes() {
       path: '/customer/products',
       element: <Products />,
     },
-    // {
-    //   path: '/customer/checkout',
-    //   element: <Checkout />,
-    // },
+    {
+      path: '/customer/checkout',
+      element: <Checkout />,
+    },
     {
       path: '/seller/orders/:id',
       element: <OrderDetails />,
