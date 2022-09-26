@@ -4,7 +4,7 @@ const path = require('path');
 
 path.resolve('/back-end/src/jwt.evaluation.key');
 
-const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8').trim();
+const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8');
 
 const tokenGenerator = (payload) => {
   const jwtConfig = {
