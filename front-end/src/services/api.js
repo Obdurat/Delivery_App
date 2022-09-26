@@ -15,6 +15,15 @@ const register = async (data) => {
   return res;
 };
 
+const getProducts = async (token) => {
+  const res = await request('/products', statusCode.OK, 'post', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
 const getSellerOrders = async (token) => {
   const res = await request('/seller/orders', statusCode.OK, 'get', {
     headers: {
@@ -36,6 +45,7 @@ const getOrderById = async (token, id) => {
 const ProviderApi = {
   login,
   register,
+  getProducts,
   getSellerOrders,
   getOrderById,
 };
