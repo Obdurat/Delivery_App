@@ -6,9 +6,14 @@ import ProductCard from './components/ProductCard';
 import { useAuth } from '../../context/useAuth';
 
 export default function Products() {
-  const { products, total } = useCart();
+  const { products, total, setCartItems } = useCart();
   const navigate = useNavigate();
-  const user = useAuth();
+  const { user } = useAuth();
+
+  const onClickCheckout = () => {
+    setCartItems(products.filter(({ quantity }) => quantity > 0));
+    navigate(`/${user.user.role}/checkout`);
+  };
 
   return (
     <div>
@@ -41,7 +46,7 @@ export default function Products() {
           style={ { position: 'fixed', bottom: '0', right: '0' } }
           data-testid="customer_products__button-cart"
           disabled={ !total }
-          onClick={ () => navigate(`/${user.role}/checkout`) }
+          onClick={ () => onClickCheckout() }
         >
           {String(total.toFixed(2))?.replace(/\./, ',')}
         </button>
