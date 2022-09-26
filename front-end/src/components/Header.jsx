@@ -5,6 +5,12 @@ import { useAuth } from '../context/useAuth';
 export default function Header() {
   const { user, setUser } = useAuth();
 
+  const titles = {
+    customer: 'Meus Pedidos',
+    seller: 'Pedidos',
+    administrator: 'Gerenciar usuários',
+  };
+
   const navigate = useNavigate();
 
   return (
@@ -13,16 +19,21 @@ export default function Header() {
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
       >
-
-        Meus pedidos
-      </button>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-products"
-      >
-        Produtos
+        {
+          titles[user?.user?.role]
+        }
       </button>
 
+      {
+        user?.user?.role === 'customer' && (
+          <button
+            type="button"
+            data-testid="customer_products__element-navbar-link-products"
+          >
+            Produtos
+          </button>
+        )
+      }
       <section
         data-testid="customer_products__element-navbar-user-full-name"
       >

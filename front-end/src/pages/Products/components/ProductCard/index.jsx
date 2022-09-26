@@ -44,6 +44,7 @@ export default function ProductCard({ product }) {
         </button>
         <input
           type="number"
+          style={ { width: '50px' } }
           onChange={ ({ target }) => editItemQuantity(product, target.value) }
           value={ quantity }
           data-testid={ `customer_products__input-card-quantity-${id}` }
