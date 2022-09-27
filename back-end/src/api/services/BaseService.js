@@ -1,9 +1,6 @@
-const path = require('path');
 const CustomError = require('../errors/CustomError');
 const passwordHash = require('../utils/passwordHash');
 const tokenGenerator = require('../utils/tokenGenerator');
-
-path.resolve('../../jwt.evaluation.key');
 
 class BaseService {
     /**
