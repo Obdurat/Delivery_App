@@ -34,21 +34,13 @@ export default function Products() {
         <button
           type="button"
           style={ { position: 'fixed', bottom: '0', right: '0' } }
-          data-testid="customer_products__checkout-bottom-value"
-          disabled={ !total }
-        >
-          {String(total.toFixed(2))?.replace(/\./, ',')}
-        </button>
-      </div>
-      <div>
-        <button
-          type="button"
-          style={ { position: 'fixed', bottom: '0', right: '0' } }
           data-testid="customer_products__button-cart"
           disabled={ !total }
           onClick={ () => onClickCheckout() }
         >
-          {String(total.toFixed(2))?.replace(/\./, ',')}
+          <span data-testid="customer_products__checkout-bottom-value">
+            {String(total.toFixed(2))?.replace(/\./, ',')}
+          </span>
         </button>
       </div>
     </div>
