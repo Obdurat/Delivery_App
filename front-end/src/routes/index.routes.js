@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+import Products from '../pages/Customer';
 import Login from '../pages/Login/Login';
-import Products from '../pages/Products';
 import Register from '../pages/Register/Register';
 import Seller from '../pages/Seller/orders';
 import OrderDetails from '../pages/Seller/orders/orderDetails';
