@@ -37,7 +37,7 @@ export default function Login() {
     }
 
     if (res.success) {
-      setUser(res.data);
+      setUser(res.data.user);
       const { role } = res.data.user;
 
       const redirectOptions = {
