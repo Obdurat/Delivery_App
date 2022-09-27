@@ -12,7 +12,7 @@ export default function Products() {
 
   const onClickCheckout = () => {
     setCartItems(products.filter(({ quantity }) => quantity > 0));
-    navigate(`/${user.user.role}/checkout`);
+    navigate(`/${user.role}/checkout`);
   };
 
   return (

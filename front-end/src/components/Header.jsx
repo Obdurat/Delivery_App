@@ -20,12 +20,12 @@ export default function Header() {
         data-testid="customer_products__element-navbar-link-orders"
       >
         {
-          titles[user?.user?.role]
+          titles[user?.role]
         }
       </button>
 
       {
-        user?.user?.role === 'customer' && (
+        user?.role === 'customer' && (
           <button
             type="button"
             data-testid="customer_products__element-navbar-link-products"
@@ -37,7 +37,7 @@ export default function Header() {
       <section
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        {user.user?.name}
+        {user.name}
       </section>
       <button
         data-testid="customer_products__element-navbar-link-logout"
