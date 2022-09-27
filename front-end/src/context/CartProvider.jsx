@@ -10,7 +10,7 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState([]);
 
   const [total, setTotal] = useState(0);
 
@@ -37,9 +37,6 @@ export function CartProvider({ children }) {
         ? { ...product, quantity: p.quantity + 1 }
         : p)),
     );
-    setCartItems(products.map((cart) => (cart.id === product.id
-      ? { ...product, quantity: cart.quantity + 1 }
-      : cart)));
   }, [products]);
 
   const removeItemFromCart = useCallback((product) => {
@@ -49,9 +46,6 @@ export function CartProvider({ children }) {
           ? { ...product, quantity: p.quantity - 1 }
           : p)),
       );
-      setCartItems(products.map((cart) => (cart.id === product.id
-        ? { ...product, quantity: cart.quantity - 1 }
-        : cart)));
     }
   }, [products]);
 
@@ -61,9 +55,6 @@ export function CartProvider({ children }) {
         ? { ...product, quantity: +quantity }
         : p)),
     );
-    setCartItems(products.map((cart) => (cart.id === product.id
-      ? { ...product, quantity: +quantity }
-      : cart)));
   }, [products]);
 
   const value = useMemo(() => ({

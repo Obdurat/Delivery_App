@@ -1,8 +1,8 @@
 import { useCart } from '../../../context/CartProvider';
 
 export default function Table() {
-  const { products } = useCart();
-  console.log('🚀', products);
+  const { cartItems } = useCart();
+  console.log('🚀', cartItems);
 
   return (
     <table>
@@ -17,7 +17,7 @@ export default function Table() {
         </tr>
       </thead>
       <tbody>
-        {products.map((product, index) => (
+        {cartItems.map((product, index) => (
           <tr key={ index }>
             <td data-testid="customer_checkout__element-order-table-item-number-<index>">
               {index + 1}
