@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+import Products from '../pages/Customer';
+import Checkout from '../pages/Customer/Checkout';
 import Login from '../pages/Login/Login';
-import Products from '../pages/Product';
-import Checkout from '../pages/Product/Checkout';
 import Register from '../pages/Register/Register';
 import Seller from '../pages/Seller/orders';
 import OrderDetails from '../pages/Seller/orders/orderDetails';
