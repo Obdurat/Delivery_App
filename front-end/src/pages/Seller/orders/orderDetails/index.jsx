@@ -1,32 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '../../../../context/useAuth';
-import ProviderApi from '../../../../services/api';
+import { useSales, SalesContext } from '../../../../context/SalesProvider';
 import Header from '../../../../components/Header';
 import DetailsCard from '../components/DetailsCard';
 
 export default function OrderDetails() {
-  const [order, setOrder] = useState({});
-  console.log('🚀 ~ file: index.jsx ~ line 11 ~ OrderDetails ~ order', order);
-
+  const { orderDetails } = useSales();
+  const salesContext = useContext(SalesContext);
   const { id } = useParams();
-  const { user } = useAuth();
-
-  useEffect(() => {
-    if (user.token) {
-      (async () => {
-        const { data, success } = await ProviderApi.getOrderById(user.token, id);
-        if (success) {
-          setOrder(data);
-        }
-      })();
-    }
-  }, [user, id]);
+  salesContext.setOrderId(id);
 
   return (
     <>
-      <Header desc="Pedidos" />
-      { order && <DetailsCard key={ order.id } details={ order } /> }
+      <Header />
+      { orderDetails && <DetailsCard details={ orderDetails } /> }
     </>
   );
 }
