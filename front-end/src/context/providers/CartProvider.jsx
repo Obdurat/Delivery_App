@@ -10,7 +10,7 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState([]);
 
   const [total, setTotal] = useState(0);
 

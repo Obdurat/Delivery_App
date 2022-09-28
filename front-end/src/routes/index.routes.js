@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import Products from '../pages/Customer';
+import Checkout from '../pages/Customer/Checkout';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Seller from '../pages/Seller/orders';
@@ -28,6 +29,10 @@ function Routes() {
     {
       path: '/customer/products',
       element: <Products />,
+    },
+    {
+      path: '/customer/checkout',
+      element: <Checkout />,
     },
     {
       path: '/seller/orders/:id',
