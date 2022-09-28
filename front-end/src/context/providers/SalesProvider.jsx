@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useMemo,
   useState,
+  useCallback,
 } from 'react';
 import ProviderApi from '../../services/api';
 import { useAuth } from './useAuth';
@@ -33,9 +34,9 @@ export function SalesProvider({ children }) {
     }
   }, [user, orderId]);
 
-  const updateOrderStatus = async (data, id) => {
+  const updateOrderStatus = useCallback(async (data, id) => {
     await ProviderApi.updateOrderStatus(user.token, data, id);
-  };
+  }, [user]);
 
   const value = useMemo(() => ({
     orders,

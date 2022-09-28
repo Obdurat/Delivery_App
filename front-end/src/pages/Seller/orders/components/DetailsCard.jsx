@@ -24,18 +24,18 @@ export default function DetailsCard({
     if (status === 'PREPARANDO') {
       setPreparing(false);
     }
-  });
+  }, [status]);
 
   const prepareBtn = async () => {
     await updateOrderStatus({ status: 'PREPARANDO' }, id);
     setPending(true);
     setPreparing(false);
-  }
+  };
 
   const deliveryBtn = async () => {
     await updateOrderStatus({ status: 'EM TRÂNSITO' }, id);
     setPreparing(true);
-  }
+  };
 
   return (
     <div>
@@ -55,6 +55,7 @@ export default function DetailsCard({
         { status }
       </div>
       <button
+        type="button"
         data-testid="seller_order_details__button-preparing-check"
         onClick={ () => prepareBtn() }
         disabled={ isPending }
@@ -62,6 +63,7 @@ export default function DetailsCard({
         Preparar Pedido
       </button>
       <button
+        type="button"
         data-testid="seller_order_details__button-dispatch-check"
         onClick={ () => deliveryBtn() }
         disabled={ isPreparing }
