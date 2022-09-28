@@ -14,19 +14,27 @@ export default function DetailsCard({
   },
 }) {
   const [isPending, setPending] = useState(true);
+  const [isPreparing, setPreparing] = useState(true);
   const { updateOrderStatus } = useSales();
 
   useEffect(() => {
-    if (status === 'Pendente') {
-      (() => {
-        setPending(false);
-      })();
+    if (status === 'PENDENTE') {
+      setPending(false);
     }
-  }, [isPending]);
+    if (status === 'PREPARANDO') {
+      setPreparing(false);
+    }
+  });
 
-  const prepareBtn = () => {
-    updateOrderStatus({ status: 'Preparando' }, id);
+  const prepareBtn = async () => {
+    await updateOrderStatus({ status: 'PREPARANDO' }, id);
     setPending(true);
+    setPreparing(false);
+  }
+
+  const deliveryBtn = async () => {
+    await updateOrderStatus({ status: 'EM TRÂNSITO' }, id);
+    setPreparing(true);
   }
 
   return (
@@ -55,6 +63,8 @@ export default function DetailsCard({
       </button>
       <button
         data-testid="seller_order_details__button-dispatch-check"
+        onClick={ () => deliveryBtn() }
+        disabled={ isPreparing }
       >
         Saiu para Entrega
       </button>

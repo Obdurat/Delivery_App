@@ -33,8 +33,8 @@ export function SalesProvider({ children }) {
     }
   }, [user, orderId]);
 
-  const updateOrderStatus = (data, id) => {
-    ProviderApi.updateOrderStatus(user.token, data, id);
+  const updateOrderStatus = async (data, id) => {
+    await ProviderApi.updateOrderStatus(user.token, data, id);
   };
 
   const value = useMemo(() => ({
