@@ -32,7 +32,7 @@ export function SalesProvider({ children }) {
         }
       })();
     }
-  }, [user, orderId]);
+  }, [user, orderId, orders, orderDetails]);
 
   const updateOrderStatus = useCallback(async (data, id) => {
     await ProviderApi.updateOrderStatus(user.token, data, id);

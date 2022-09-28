@@ -3,9 +3,9 @@ const CustomError = require('../errors/CustomError');
 const Models = require('../../database/models');
 
 class SellerService extends BaseService {
-  async getAll(userId) {
+  async getAll(sellerId) {
     const sales = await this.model.findAll({
-      where: { userId },
+      where: { sellerId },
     });    
     if (sales.length === 0) throw new CustomError([], 404);  
     return sales;
