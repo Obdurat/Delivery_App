@@ -15,7 +15,7 @@ export default function DetailsCard({
 }) {
   const [isPending, setPending] = useState(true);
   const [isPreparing, setPreparing] = useState(true);
-  const { updateOrderStatus } = useSales();
+  const { updateOrderStatus, setUpStatus } = useSales();
 
   useEffect(() => {
     if (status === 'PENDENTE') {
@@ -30,11 +30,13 @@ export default function DetailsCard({
     await updateOrderStatus({ status: 'PREPARANDO' }, id);
     setPending(true);
     setPreparing(false);
+    setUpStatus(true);
   };
 
   const deliveryBtn = async () => {
     await updateOrderStatus({ status: 'EM TRÂNSITO' }, id);
     setPreparing(true);
+    setUpStatus(true);
   };
 
   return (

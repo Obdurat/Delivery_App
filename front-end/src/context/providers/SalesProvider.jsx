@@ -16,6 +16,7 @@ export function SalesProvider({ children }) {
   const [orders, setOrders] = useState([]);
   const [orderDetails, setOrderDetails] = useState({});
   const [orderId, setOrderId] = useState('');
+  const [upStatus, setUpStatus] = useState(false);
 
   const { user } = useAuth();
 
@@ -32,7 +33,7 @@ export function SalesProvider({ children }) {
         }
       })();
     }
-  }, [user, orderId, orders, orderDetails]);
+  }, [user, orderId, upStatus]);
 
   const updateOrderStatus = useCallback(async (data, id) => {
     await ProviderApi.updateOrderStatus(user.token, data, id);
@@ -43,11 +44,13 @@ export function SalesProvider({ children }) {
     orderDetails,
     setOrderId,
     updateOrderStatus,
+    setUpStatus,
   }), [
     orders,
     orderDetails,
     setOrderId,
     updateOrderStatus,
+    setUpStatus,
   ]);
 
   return <SalesContext.Provider value={ value }>{children}</SalesContext.Provider>;
