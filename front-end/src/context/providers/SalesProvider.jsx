@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import ProviderApi from '../services/api';
+import ProviderApi from '../../services/api';
 import { useAuth } from './useAuth';
 
 export const SalesContext = createContext();

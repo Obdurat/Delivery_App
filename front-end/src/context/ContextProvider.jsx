@@ -1,17 +1,11 @@
 import React from 'react';
-import { CartProvider } from './CartProvider';
-import { SalesProvider } from './SalesProvider';
-import { AuthProvider } from './useAuth';
+import { CartProvider } from './providers/CartProvider';
+import { SalesProvider } from './providers/SalesProvider';
+import { AuthProvider } from './providers/useAuth';
 
 const providers = [AuthProvider, CartProvider, SalesProvider];
-
-const CombineProviders = ({ children }) => providers
-  .reduce((AccComponents, CurrComponent) => (
-    <AccComponents>
-      <CurrComponent>{children}</CurrComponent>
-    </AccComponents>
-  ));
-
-const ContextProvider = CombineProviders();
-
-export default ContextProvider;
+export default function ContextProvider({ children }) {
+  return providers.reduceRight((acc, CurrComponent) => (
+    <CurrComponent>{acc}</CurrComponent>
+  ), children);
+}

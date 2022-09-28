@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import ProviderApi from '../../services/api';
-import { useAuth } from '../../context/useAuth';
+import { useAuth } from '../../context/providers/useAuth';
 import { statusCode } from '../../utils/constants';
 import { removeUser, saveUser } from '../../utils/localStorage';
 

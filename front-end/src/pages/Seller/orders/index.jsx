@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSales } from '../../../context/SalesProvider';
+import { useSales } from '../../../context/providers/SalesProvider';
 import OrderCard from './components/OrderCard';
 import Header from '../../../components/Header';
 

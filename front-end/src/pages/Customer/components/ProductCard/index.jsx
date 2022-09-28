@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useCart } from '../../../../context/CartProvider';
+import { useCart } from '../../../../context/providers/CartProvider';
 
 export default function ProductCard({ product }) {
   const { id, name, price, urlImage, quantity } = product;
