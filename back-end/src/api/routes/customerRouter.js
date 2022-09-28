@@ -15,13 +15,13 @@ const Endpoints = express.Router();
 Endpoints.route('/')
     .get(Controller.getAll);
 
+Endpoints.route('/sales')
+    .get(authToken, Controller.getSales);
+
 Endpoints.route('/:id')
     .get(Controller.getOne)
     .put(Controller.update)
     .delete(Controller.delete);
-
-Endpoints.route('/products')
-    .get(() => ({ message: 'Not implemented' }));
 
 Endpoints.route('/checkout')
     .post(authToken, Controller.createSale);
