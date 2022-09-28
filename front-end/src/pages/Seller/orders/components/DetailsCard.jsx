@@ -8,6 +8,7 @@ export default function DetailsCard({
     deliveryNumber,
     status,
     saleDate,
+    totalPrice,
     products,
   },
 }) {
@@ -28,15 +29,22 @@ export default function DetailsCard({
       >
         { status }
       </div>
-      {/* <div
-        data-testid={ 'seller_order_details__button-preparing-check' }
+      <button
+        data-testid="seller_order_details__button-preparing-check"
       >
-      </div> */}
+        Preparar Pedido
+      </button>
+      <button
+        data-testid="seller_order_details__button-dispatch-check"
+      >
+        Saiu para Entrega
+      </button>
       <OrderProducts products={ products } />
-      {/* <div
-        data-testid={ 'seller_order_details__element-order-total-price' }
+      <div
+        data-testid="seller_order_details__element-order-total-price"
       >
-      </div> */}
+        {Number(totalPrice).toFixed(2)}
+      </div>
     </div>
   );
 }
