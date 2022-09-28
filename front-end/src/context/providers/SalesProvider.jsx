@@ -33,14 +33,20 @@ export function SalesProvider({ children }) {
     }
   }, [user, orderId]);
 
+  const updateOrderStatus = (data, id) => {
+    ProviderApi.updateOrderStatus(user.token, data, id);
+  };
+
   const value = useMemo(() => ({
     orders,
     orderDetails,
     setOrderId,
+    updateOrderStatus,
   }), [
     orders,
     orderDetails,
     setOrderId,
+    updateOrderStatus,
   ]);
 
   return <SalesContext.Provider value={ value }>{children}</SalesContext.Provider>;

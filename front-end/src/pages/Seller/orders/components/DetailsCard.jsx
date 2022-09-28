@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSales } from '../../../../context/providers/SalesProvider';
 import OrderProducts from './OrderProducts';
 
 export default function DetailsCard({
@@ -12,6 +13,22 @@ export default function DetailsCard({
     products,
   },
 }) {
+  const [isPending, setPending] = useState(true);
+  const { updateOrderStatus } = useSales();
+
+  useEffect(() => {
+    if (status === 'Pendente') {
+      (() => {
+        setPending(false);
+      })();
+    }
+  }, [isPending]);
+
+  const prepareBtn = () => {
+    updateOrderStatus({ status: 'Preparando' }, id);
+    setPending(true);
+  }
+
   return (
     <div>
       <div
@@ -31,6 +48,8 @@ export default function DetailsCard({
       </div>
       <button
         data-testid="seller_order_details__button-preparing-check"
+        onClick={ () => prepareBtn() }
+        disabled={ isPending }
       >
         Preparar Pedido
       </button>

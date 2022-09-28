@@ -6,7 +6,6 @@ import DetailsCard from '../components/DetailsCard';
 
 export default function OrderDetails() {
   const { orderDetails, setOrderId } = useSales();
-  console.log("🚀 ~ file: index.jsx ~ line 9 ~ OrderDetails ~ orderDetails", orderDetails)
   const { id } = useParams();
 
   useEffect(() => {
