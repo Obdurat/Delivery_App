@@ -4,7 +4,7 @@ import Table from './components/Table';
 
 export default function Checkout() {
   const { total } = useCart();
-  const sellers = { id: 1, name: 'Fulana' }; // placeholder
+  const sellers = [{ id: 1, name: 'Fulana' }]; // placeholder
 
   return (
     <div>
