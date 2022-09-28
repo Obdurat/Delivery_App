@@ -13,6 +13,7 @@ export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
   const [total, setTotal] = useState(0);
+  const [totalCart, setTotalCart] = useState(0);
 
   const { user } = useAuth();
 
@@ -30,6 +31,14 @@ export function CartProvider({ children }) {
     }, 0);
     setTotal(totalValue);
   }, [products]);
+
+  useEffect(() => {
+    const totalCartValue = cartItems?.reduce((acc, { price, quantity }) => {
+      const priceNumber = Number(price.replace(',', '.'));
+      return acc + (priceNumber * quantity);
+    }, 0);
+    setTotalCart(totalCartValue);
+  }, [cartItems]);
 
   const addItemToCart = useCallback((product) => {
     setProducts(
@@ -49,6 +58,11 @@ export function CartProvider({ children }) {
     }
   }, [products]);
 
+  const removeItemFromCheckout = useCallback((product) => {
+    const deletedItem = cartItems.filter((item) => item.id !== product.id);
+    setCartItems(deletedItem);
+  }, [cartItems]);
+
   const editItemQuantity = useCallback((product, quantity) => {
     setProducts(
       products.map((p) => (p.id === product.id
@@ -66,6 +80,8 @@ export function CartProvider({ children }) {
     editItemQuantity,
     cartItems,
     setCartItems,
+    removeItemFromCheckout,
+    totalCart,
   }), [
     products,
     total,
@@ -74,6 +90,8 @@ export function CartProvider({ children }) {
     editItemQuantity,
     cartItems,
     setCartItems,
+    removeItemFromCheckout,
+    totalCart,
   ]);
 
   return <CartContext.Provider value={ value }>{children}</CartContext.Provider>;

@@ -1,7 +1,7 @@
 import { useCart } from '../../../context/providers/CartProvider';
 
 export default function Table() {
-  const { cartItems } = useCart();
+  const { cartItems, removeItemFromCheckout } = useCart();
 
   return (
     <table>
@@ -39,7 +39,6 @@ export default function Table() {
               data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
             >
               {(product.price).replace(/\./, ',')}
-              {console.log('🚀 ~ product.price', typeof product.price)}
             </td>
             <td
               data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
@@ -50,6 +49,7 @@ export default function Table() {
               <button
                 type="button"
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                onClick={ () => removeItemFromCheckout(product) }
               >
                 Remover
               </button>
