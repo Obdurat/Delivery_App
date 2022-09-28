@@ -53,6 +53,16 @@ const updateOrderStatus = async (token, data, id) => {
   return res;
 };
 
+const adminRegister = async (token, data) => {
+  const res = await request('/admin/manage', statusCode.CREATED, 'post', {
+    body: data,
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
 const ProviderApi = {
   login,
   register,
@@ -60,6 +70,7 @@ const ProviderApi = {
   getSellerOrders,
   getOrderById,
   updateOrderStatus,
+  adminRegister,
 };
 
 export default ProviderApi;
