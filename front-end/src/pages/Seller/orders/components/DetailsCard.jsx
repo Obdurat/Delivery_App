@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import OrderProducts from './OrderProducts';
 
 export default function DetailsCard({
   details: {
@@ -7,6 +8,7 @@ export default function DetailsCard({
     deliveryNumber,
     status,
     saleDate,
+    products,
   },
 }) {
   return (
@@ -29,28 +31,9 @@ export default function DetailsCard({
       {/* <div
         data-testid={ 'seller_order_details__button-preparing-check' }
       >
-      </div>
-      <div
-        data-testid={ 'seller_order_details__element-order-table-item-number-<index>' }
-      >
-      </div>
-      <div
-        data-testid={ 'seller_order_details__element-order-table-name-<index>' }
-      >
-      </div>
-      <div
-        data-testid={ 'seller_order_details__element-order-table-quantity-<index>' }
-      >
-      </div>
-      <div
-        data-testid={ 'seller_order_details__element-order-table-unit-price-<index>' }
-      >
-      </div>
-      <div
-        data-testid={ 'seller_order_details__element-order-table-sub-total-<index>' }
-      >
-      </div>
-      <div
+      </div> */}
+      <OrderProducts products={ products } />
+      {/* <div
         data-testid={ 'seller_order_details__element-order-total-price' }
       >
       </div> */}
