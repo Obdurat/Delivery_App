@@ -1,4 +1,4 @@
-import { useCart } from '../../../context/CartProvider';
+import { useCart } from '../../../context/providers/CartProvider';
 
 export default function Table() {
   const { cartItems } = useCart();

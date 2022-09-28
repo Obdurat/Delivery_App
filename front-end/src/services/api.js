@@ -42,12 +42,23 @@ const getOrderById = async (token, id) => {
   return res;
 };
 
+const updateOrderStatus = async (token, data, id) => {
+  const res = await request(`/orders/${id}`, statusCode.OK, 'put', {
+    body: data,
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
 const ProviderApi = {
   login,
   register,
   getProducts,
   getSellerOrders,
   getOrderById,
+  updateOrderStatus,
 };
 
 export default ProviderApi;

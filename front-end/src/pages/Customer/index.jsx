@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
-import { useCart } from '../../context/CartProvider';
+import { useCart } from '../../context/providers/CartProvider';
 import ProductCard from './components/ProductCard';
-import { useAuth } from '../../context/useAuth';
+import { useAuth } from '../../context/providers/useAuth';
 
 export default function Products() {
   const { products, total, setCartItems } = useCart();
