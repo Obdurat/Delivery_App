@@ -16,12 +16,12 @@ export function SalesProvider({ children }) {
   const [orders, setOrders] = useState([]);
   const [orderDetails, setOrderDetails] = useState({});
   const [orderId, setOrderId] = useState('');
-  const [upStatus, setUpStatus] = useState(false);
+  const [upStatus, setUpStatus] = useState(true);
 
   const { user } = useAuth();
 
   useEffect(() => {
-    if (user.token) {
+    if (user.token && user.role === 'seller') {
       (async () => {
         const allOrders = await ProviderApi.getSellerOrders(user.token);
         const orderById = await ProviderApi.getOrderById(user.token, orderId);
@@ -37,20 +37,19 @@ export function SalesProvider({ children }) {
 
   const updateOrderStatus = useCallback(async (data, id) => {
     await ProviderApi.updateOrderStatus(user.token, data, id);
-  }, [user]);
+    setUpStatus(!upStatus);
+  }, [user, upStatus]);
 
   const value = useMemo(() => ({
     orders,
     orderDetails,
     setOrderId,
     updateOrderStatus,
-    setUpStatus,
   }), [
     orders,
     orderDetails,
     setOrderId,
     updateOrderStatus,
-    setUpStatus,
   ]);
 
   return <SalesContext.Provider value={ value }>{children}</SalesContext.Provider>;
