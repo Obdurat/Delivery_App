@@ -1,9 +1,10 @@
 import Header from '../../components/Header';
-import { useCart } from '../../context/CartProvider';
+import { useCart } from '../../context/providers/CartProvider';
 import Table from './components/Table';
 
 export default function Checkout() {
   const { total } = useCart();
+  const sellers = { id: 1, name: 'Fulana' }; // placeholder
 
   return (
     <div>
@@ -32,10 +33,10 @@ export default function Checkout() {
               data-testid="customer_checkout__select-seller"
               name="orderSeller"
             >
-              <option>Fulana</option>
-              {/* {sellers.map((seller) => (
+              {/* <option>Fulana</option> */}
+              {sellers.map((seller) => (
                 <option key={ seller.id } value={ seller.name }>{ seller.name }</option>
-              ))} */}
+              ))}
             </select>
           </label>
           <label
