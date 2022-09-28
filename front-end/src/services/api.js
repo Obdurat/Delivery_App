@@ -30,7 +30,6 @@ const getSellerOrders = async (token) => {
       Authorization: token,
     },
   });
-  console.log(res);
   return res;
 };
 
