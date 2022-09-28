@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useAuth } from '../context/useAuth';
+import { useAuth } from '../context/providers/useAuth';
 
 function PrivateRoute({ children }) {
   const { loggedIn } = useAuth();

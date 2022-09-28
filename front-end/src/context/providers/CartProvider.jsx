@@ -3,7 +3,7 @@ import React, {
   createContext, useCallback,
   useContext, useEffect, useMemo, useState,
 } from 'react';
-import ProviderApi from '../services/api';
+import ProviderApi from '../../services/api';
 import { useAuth } from './useAuth';
 
 const CartContext = createContext();
