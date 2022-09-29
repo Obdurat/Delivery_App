@@ -52,6 +52,16 @@ const updateOrderStatus = async (token, data, id) => {
   return res;
 };
 
+const adminRegister = async (token, data) => {
+  const res = await request('/admin/manage', statusCode.CREATED, 'post', {
+    body: data,
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
 const createSale = async (token, data) => {
   const res = await request('/customer/checkout', statusCode.CREATED, 'post', {
     body: data,
@@ -69,6 +79,7 @@ const ProviderApi = {
   getSellerOrders,
   getOrderById,
   updateOrderStatus,
+  adminRegister,
   createSale,
 };
 

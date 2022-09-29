@@ -7,6 +7,7 @@ import Register from '../pages/Register/Register';
 import Seller from '../pages/Seller/orders';
 import OrderDetails from '../pages/Seller/orders/orderDetails';
 import PrivateRoute from './privateRoute';
+import Admin from '../pages/Admin';
 
 function Routes() {
   const routes = useRoutes([
@@ -41,6 +42,10 @@ function Routes() {
     {
       path: '/seller/orders/:id',
       element: <OrderDetails />,
+    },
+    {
+      path: '/admin/manage/',
+      element: <Admin />,
     },
   ]);
 
