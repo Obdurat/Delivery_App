@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import moment from 'moment';
 import Header from '../../../components/Header';
 import { useSales } from '../../../context/providers/SalesProvider';
 import { useUsers } from '../../../context/providers/UserProvider';
 import OrderProducts from '../../Seller/orders/components/OrderProducts';
 
 export default function CustomerOrderDetails() {
-  const { users, detailsOrder, setOrderId } = useUsers();
+  const { findSeller, detailsOrder, setOrderId } = useUsers();
   const { updateOrderStatus } = useSales();
   const { id } = useParams();
 
@@ -18,9 +19,6 @@ export default function CustomerOrderDetails() {
     products,
   } = detailsOrder;
 
-  const seller = users.filter((item) => item.id === sellerId);
-  console.log('🚀 ~ seller', users, sellerId);
-
   useEffect(() => {
     setOrderId(id);
   }, [setOrderId, id]);
@@ -28,8 +26,6 @@ export default function CustomerOrderDetails() {
   const statusBtn = async ({ target }) => {
     await updateOrderStatus({ status: target.value }, id);
   };
-
-  // const prefix = 'customer_order_details__element';
 
   return (
     <>
@@ -45,7 +41,7 @@ export default function CustomerOrderDetails() {
           <div
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            { seller[0].name }
+            { findSeller(sellerId)[0].name }
           </div>
           <div
             data-testid="customer_order_details__element-order-details-label-order-date"

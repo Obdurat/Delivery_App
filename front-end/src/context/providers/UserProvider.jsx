@@ -27,14 +27,14 @@ export function UserProvider({ children }) {
         const userOrderRes = await ProviderApi.getSalesById(user.token);
         const userOrderDetailsRes = await ProviderApi
           .getCustomerOrderById(orderId, user.token);
-        if (userOrderDetailsRes.success) {
-          setDetailsOrder(userOrderDetailsRes.data);
-        }
         if (userRes.success) {
           setUsers(userRes.data);
         }
         if (userOrderRes.success) {
           setUserOrders(userOrderRes.data);
+        }
+        if (userOrderDetailsRes.success) {
+          setDetailsOrder(userOrderDetailsRes.data);
         }
       })();
     }
@@ -45,6 +45,10 @@ export function UserProvider({ children }) {
     setDelUser(!delUser);
   }, [delUser, user.token]);
 
+  const findSeller = useCallback((sellerId) => (
+    users.filter((item) => item.id === sellerId)
+  ), [users]);
+
   const value = useMemo(() => (
     {
       users,
@@ -52,12 +56,14 @@ export function UserProvider({ children }) {
       userOrders,
       detailsOrder,
       setOrderId,
+      findSeller,
     }), [
     users,
     deleteUser,
     userOrders,
     detailsOrder,
     setOrderId,
+    findSeller,
   ]);
   console.log(detailsOrder);
 
