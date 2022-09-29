@@ -25,7 +25,7 @@ class CustomerService extends BaseService {
         return record;
     }
 
-    async getSales(userId) {
+    async getSalesById(userId) {
         const sales = await this.assct.sales.findAll({ where: { userId } });
         return sales;
     }

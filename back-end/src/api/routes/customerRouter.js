@@ -16,7 +16,7 @@ Endpoints.route('/')
     .get(Controller.getAll);
 
 Endpoints.route('/sales')
-    .get(authToken, Controller.getSales);
+    .get(authToken, Controller.getSalesById);
 
 Endpoints.route('/:id')
     .get(Controller.getOne)

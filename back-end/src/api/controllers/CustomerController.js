@@ -4,7 +4,7 @@ class CustomerController extends BaseController {
     constructor(service) {
         super(service);
         this.createSale = this.createSale.bind(this);
-        this.getSales = this.getSales.bind(this);
+        this.getSalesById = this.getSalesById.bind(this);
     }
 
     // Metodos Adicionais vem na sub-classe aqui
@@ -15,9 +15,9 @@ class CustomerController extends BaseController {
         return res.status(201).json(request);
     }
 
-    async getSales(req, res) {
+    async getSalesById(req, res) {
         const { user } = req;
-        const request = await this.service.getSales(user.id);
+        const request = await this.service.getSalesById(user.id);
         return res.status(200).json(request);
     }
 }

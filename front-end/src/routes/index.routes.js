@@ -8,6 +8,7 @@ import Seller from '../pages/Seller/orders';
 import OrderDetails from '../pages/Seller/orders/orderDetails';
 import PrivateRoute from './privateRoute';
 import Admin from '../pages/Admin';
+import Orders from '../pages/Customer/Orders';
 
 function Routes() {
   const routes = useRoutes([
@@ -34,6 +35,10 @@ function Routes() {
     {
       path: '/customer/checkout',
       element: <Checkout />,
+    },
+    {
+      path: '/customer/orders',
+      element: <Orders />,
     },
     {
       path: '/customer/orders/:id',
