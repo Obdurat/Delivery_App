@@ -14,4 +14,7 @@ const Endpoints = express.Router();
 Endpoints.route('/manage')
     .post(adminValidation, Controller.create);
 
+Endpoints.route('/manage/users')
+    .get(Controller.getAll);
+
 module.exports = Endpoints;

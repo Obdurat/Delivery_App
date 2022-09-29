@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useAuth } from '../../context/providers/useAuth';
 import ProviderApi from '../../services/api';
+import Header from '../../components/Header';
+import UsersList from './components/UsersList';
 
 const SIX = 6;
 
@@ -38,6 +40,7 @@ export default function Manage() {
 
   return (
     <div>
+      <Header />
       <div
         data-testid="admin_manage__element-invalid-register"
         style={ { visibility: (!isValid ? 'hidden' : 'visible') } }
@@ -87,6 +90,7 @@ export default function Manage() {
           register
         </button>
       </form>
+      <UsersList />
     </div>
   );
 }
