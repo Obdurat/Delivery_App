@@ -2,16 +2,15 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Header from '../../components/Header';
 import { useCart } from '../../context/providers/CartProvider';
-// import { useSales } from '../../context/providers/SalesProvider';
 import Table from './components/Table';
 import ProviderApi from '../../services/api';
 import { useAuth } from '../../context/providers/useAuth';
+import { useUsers } from '../../context/providers/UserProvider';
 
 export default function Checkout() {
   const { cartItems, totalCart } = useCart();
   const { user } = useAuth();
-  // const { orderId } = useSales();
-  const sellers = [{ id: 2, name: 'Fulana' }]; // placeholder
+  const { users } = useUsers();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
@@ -24,7 +23,6 @@ export default function Checkout() {
           quantity: item.quantity,
         })) };
     const res = await ProviderApi.createSale(user.token, sale);
-    // console.log('🚀 ~ res', res);
     if (res.success) {
       navigate(`/customer/orders/${res.data[0].saleId}`);
     }
@@ -55,7 +53,7 @@ export default function Checkout() {
               data-testid="customer_checkout__select-seller"
               { ...register('sellerId') }
             >
-              {sellers.map((seller) => (
+              {users.filter((elem) => elem.role === 'seller').map((seller) => (
                 <option key={ seller.id } value={ seller.id }>{ seller.name }</option>
               ))}
             </select>
