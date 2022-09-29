@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
   const SalesProducts = sequelize.define('salesProducts', Attributes, {
       underscore: true,
       timestamps: false,
-      tableName: 'salesProducts',
+      tableName: 'sales_products',
     },
   );
 
