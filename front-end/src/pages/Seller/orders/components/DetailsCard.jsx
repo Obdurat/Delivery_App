@@ -1,53 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { useSales } from '../../../../context/providers/SalesProvider';
 import OrderProducts from './OrderProducts';
 
 export default function DetailsCard({
   details: {
     id,
-    deliveryNumber,
     status,
     saleDate,
     totalPrice,
     products,
   },
 }) {
-  const [isPending, setPending] = useState(true);
-  const [isPreparing, setPreparing] = useState(true);
   const { updateOrderStatus } = useSales();
 
-  useEffect(() => {
-    if (status === 'PENDENTE') {
-      setPending(false);
-    }
-    if (status === 'PREPARANDO') {
-      setPreparing(false);
-    }
-  }, [status]);
-
-  const prepareBtn = async () => {
-    await updateOrderStatus({ status: 'PREPARANDO' }, id);
-    setPending(true);
-    setPreparing(false);
-  };
-
-  const deliveryBtn = async () => {
-    await updateOrderStatus({ status: 'EM TRÂNSITO' }, id);
-    setPreparing(true);
+  const statusBtn = async ({ target }) => {
+    await updateOrderStatus({ status: target.value }, id);
   };
 
   return (
     <div>
       <div
-        data-testid={ `seller_order_details__element-order-details-label-order-${id}` }
+        data-testid="seller_order_details__element-order-details-label-order-id"
       >
-        { `Pedido ${deliveryNumber}` }
+        { id }
       </div>
       <div
         data-testid="seller_order_details__element-order-details-label-order-date"
       >
-        { saleDate }
+        { moment(saleDate).format('DD/MM/YYYY') }
       </div>
       <div
         data-testid="seller_order_details__element-order-details-label-delivery-status"
@@ -56,17 +38,19 @@ export default function DetailsCard({
       </div>
       <button
         type="button"
+        value="Preparando"
         data-testid="seller_order_details__button-preparing-check"
-        onClick={ () => prepareBtn() }
-        disabled={ isPending }
+        onClick={ statusBtn }
+        disabled={ status !== 'Pendente' }
       >
         Preparar Pedido
       </button>
       <button
         type="button"
+        value="Em Trânsito"
         data-testid="seller_order_details__button-dispatch-check"
-        onClick={ () => deliveryBtn() }
-        disabled={ isPreparing }
+        onClick={ statusBtn }
+        disabled={ status !== 'Preparando' }
       >
         Saiu para Entrega
       </button>
@@ -74,7 +58,7 @@ export default function DetailsCard({
       <div
         data-testid="seller_order_details__element-order-total-price"
       >
-        {Number(totalPrice).toFixed(2)}
+        {Number(totalPrice).toFixed(2).replace(/\./, ',')}
       </div>
     </div>
   );
@@ -82,7 +66,6 @@ export default function DetailsCard({
 
 DetailsCard.propTypes = {
   id: PropTypes.number,
-  deliveryNumber: PropTypes.string,
   status: PropTypes.string,
   saleDate: PropTypes.string,
 }.isRequired;

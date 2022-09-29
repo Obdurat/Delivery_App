@@ -11,7 +11,7 @@ module.exports = {
         delivery_address: 'street',
         delivery_number: '12345',
         sale_date: '2001/08/01',
-        status: 'PENDENTE',
+        status: 'Pendente',
       },
       {
         id: 2,
@@ -21,7 +21,7 @@ module.exports = {
         delivery_address: 'strtt',
         delivery_number: '12345',
         sale_date: '2001/08/01',
-        status: 'ENTREGUE',
+        status: 'Entregue',
       }], { timestamps: false });
   },
 
