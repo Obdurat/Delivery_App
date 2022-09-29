@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import ProviderApi from '../../services/api';
 import { useAuth } from '../../context/providers/useAuth';
 import { statusCode } from '../../utils/constants';
-import { removeUser, saveUser } from '../../utils/localStorage';
+import { saveUser, getFromLocalStorage } from '../../utils/localStorage';
 
 const SIX = 6;
 const validationSchema = Yup.object().shape({
@@ -26,7 +26,17 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    removeUser();
+    const userValid = getFromLocalStorage('user');
+    if (userValid) {
+      setUser({ ...userValid });
+      const { role } = userValid;
+      const redirectOptions = {
+        administrator: '/admin/manage',
+        seller: '/seller/orders',
+        customer: '/customer/products',
+      };
+      navigate(redirectOptions[role]);
+    }
   }, []);
 
   const onSubmit = async (data) => {
