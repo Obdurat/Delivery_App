@@ -81,6 +81,32 @@ const getSalesById = async (token) => {
   return res;
 };
 
+const getCustomerOrderById = async (id, token) => {
+  const res = await request(`/customer/sales/${id}`, statusCode.OK, 'get', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
+const getUsers = async (token) => {
+  const res = await request('/admin/manage/users', statusCode.OK, 'get', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
+const deleteUser = async (token, id) => {
+  await request(`/admin/manage/users/${id}`, statusCode.OK, 'delete', {
+    headers: {
+      Authorization: token,
+    },
+  });
+};
+
 const ProviderApi = {
   login,
   register,
@@ -91,6 +117,9 @@ const ProviderApi = {
   adminRegister,
   createSale,
   getSalesById,
+  getCustomerOrderById,
+  getUsers,
+  deleteUser,
 };
 
 export default ProviderApi;

@@ -10,6 +10,9 @@ const authToken = require('../middlewares/authToken');
 const Service = new CustomerService(Models.users, Models);
 const Controller = new CustomerController(Service);
 
+const ServiceSale = new CustomerService(Models.sales, Models);
+const ControllerSale = new CustomerController(ServiceSale);
+
 const Endpoints = express.Router();
 
 Endpoints.route('/')
@@ -25,5 +28,8 @@ Endpoints.route('/:id')
 
 Endpoints.route('/checkout')
     .post(authToken, Controller.createSale);
+
+Endpoints.route('/sales/:id')
+    .get(authToken, ControllerSale.getOne);
 
 module.exports = Endpoints;

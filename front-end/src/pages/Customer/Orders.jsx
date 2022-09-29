@@ -1,7 +1,6 @@
 import Header from '../../components/Header';
+import { useUsers } from '../../context/providers/UserProvider';
 import CardOrder from './components/CardOrder';
-import { useAuth } from '../../context/providers/useAuth';
-import ProviderApi from '../../services/api';
 
 export default function Orders() {
   // const orders = [
@@ -26,11 +25,8 @@ export default function Orders() {
   //     status: 'ENTREGUE',
   //   },
   // ];
-  const { user } = useAuth();
-  const orders = async () => {
-    const res = await ProviderApi.getsalesById(user.token);
-    return res;
-  };
+  const { userOrders } = useUsers();
+  console.log(userOrders);
 
   return (
     <>
@@ -38,7 +34,7 @@ export default function Orders() {
         <Header />
       </div>
       <div>
-        {orders.map((order) => (
+        {userOrders.map((order) => (
           <CardOrder key={ order.id } order={ order } />
         ))}
       </div>

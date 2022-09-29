@@ -1,3 +1,5 @@
+const Models = require('../../database/models');
+
 const BaseService = require('./BaseService');
 
 class CustomerService extends BaseService {
@@ -28,6 +30,14 @@ class CustomerService extends BaseService {
     async getSalesById(userId) {
         const sales = await this.assct.sales.findAll({ where: { userId } });
         return sales;
+    }
+
+    async getOne(id) {
+        const request = await this.model.findOne({
+          where: { id },
+          include: [{ model: Models.products, as: 'products' }],
+        });
+        return request;
     }
 }
 
