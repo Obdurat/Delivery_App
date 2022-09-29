@@ -90,7 +90,10 @@ export default function Manage() {
           register
         </button>
       </form>
-      <UsersList />
+      <section>
+        <h4>Lista de usuários</h4>
+        <UsersList />
+      </section>
     </div>
   );
 }

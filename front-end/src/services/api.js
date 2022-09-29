@@ -72,6 +72,15 @@ const createSale = async (token, data) => {
   return res;
 };
 
+const getUsers = async (token) => {
+  const res = await request('/admin/manage/users', statusCode.OK, 'get', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
 const ProviderApi = {
   login,
   register,
@@ -81,6 +90,7 @@ const ProviderApi = {
   updateOrderStatus,
   adminRegister,
   createSale,
+  getUsers,
 };
 
 export default ProviderApi;

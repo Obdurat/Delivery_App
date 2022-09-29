@@ -3,6 +3,7 @@ const Models = require('../../database/models');
 const CustomerController = require('../controllers/CustomerController');
 const CustomerService = require('../services/CustomerService');
 const adminValidation = require('../middlewares/adminValidation');
+const authToken = require('../middlewares/authToken');
 
 // Padrão de instanciar as classes nas Routas ??? Se prefirirem fazemos Factory
 
@@ -15,6 +16,6 @@ Endpoints.route('/manage')
     .post(adminValidation, Controller.create);
 
 Endpoints.route('/manage/users')
-    .get(Controller.getAll);
+    .get(authToken, Controller.getAll);
 
 module.exports = Endpoints;
