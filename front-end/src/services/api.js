@@ -81,6 +81,14 @@ const getUsers = async (token) => {
   return res;
 };
 
+const deleteUser = async (token, id) => {
+  await request(`/admin/manage/users/${id}`, statusCode.OK, 'delete', {
+    headers: {
+      Authorization: token,
+    },
+  });
+};
+
 const ProviderApi = {
   login,
   register,
@@ -91,6 +99,7 @@ const ProviderApi = {
   adminRegister,
   createSale,
   getUsers,
+  deleteUser,
 };
 
 export default ProviderApi;

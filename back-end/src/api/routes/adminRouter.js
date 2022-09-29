@@ -18,4 +18,7 @@ Endpoints.route('/manage')
 Endpoints.route('/manage/users')
     .get(authToken, Controller.getAll);
 
+Endpoints.route('/manage/users/:id')
+    .delete(authToken, Controller.delete);
+
 module.exports = Endpoints;

@@ -1,7 +1,7 @@
 import { useUsers } from '../../../context/providers/UserProvider';
 
 export default function Table() {
-  const { users } = useUsers();
+  const { users, deleteUser } = useUsers();
 
   return (
     <table>
@@ -43,6 +43,7 @@ export default function Table() {
                 <button
                   type="button"
                   data-testid={ `admin_manage__element-user-table-remove-${index}` }
+                  onClick={ () => deleteUser(user.id) }
                 >
                   Delete
                 </button>

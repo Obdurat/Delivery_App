@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useState,
   useEffect,
+  useCallback,
 } from 'react';
 import ProviderApi from '../../services/api';
 import { useAuth } from './useAuth';
@@ -13,6 +14,7 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [users, setUsers] = useState([]);
+  const [delUser, setDelUser] = useState(true);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -24,9 +26,14 @@ export function UserProvider({ children }) {
         }
       })();
     }
-  }, [user]);
+  }, [user, delUser]);
 
-  const value = useMemo(() => ({ users }), [users]);
+  const deleteUser = useCallback(async (id) => {
+    await ProviderApi.deleteUser(user.token, id);
+    setDelUser(!delUser);
+  }, [delUser, user.token]);
+
+  const value = useMemo(() => ({ users, deleteUser }), [users, deleteUser]);
 
   return <UserContext.Provider value={ value }>{children}</UserContext.Provider>;
 }
