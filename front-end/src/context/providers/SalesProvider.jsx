@@ -21,7 +21,7 @@ export function SalesProvider({ children }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (user.token && user.role === 'seller') {
+    if (user.token) {
       (async () => {
         const allOrders = await ProviderApi.getSellerOrders(user.token);
         const orderById = await ProviderApi.getOrderById(user.token, orderId);

@@ -36,6 +36,10 @@ function Routes() {
       element: <Checkout />,
     },
     {
+      path: '/customer/orders/:id',
+      element: <Products />,
+    },
+    {
       path: '/seller/orders/:id',
       element: <OrderDetails />,
     },
