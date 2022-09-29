@@ -31,10 +31,10 @@ module.exports = {
         onUpdate: 'CASCADE',
       },
       total_price: {
-        type: Sequelize.STRING,
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
-      delivery_adress: {
+      delivery_address: {
         type: Sequelize.STRING,
         allowNull: false,
       },

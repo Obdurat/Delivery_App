@@ -37,6 +37,7 @@ export function CartProvider({ children }) {
       const priceNumber = Number(price.replace(',', '.'));
       return acc + (priceNumber * quantity);
     }, 0);
+    console.log(totalCartValue);
     setTotalCart(totalCartValue);
   }, [cartItems]);
 

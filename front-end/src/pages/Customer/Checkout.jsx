@@ -11,13 +11,13 @@ export default function Checkout() {
   const { cartItems, totalCart } = useCart();
   const { user } = useAuth();
   // const { orderId } = useSales();
-  const sellers = [{ id: 1, name: 'Fulana' }]; // placeholder
+  const sellers = [{ id: 2, name: 'Fulana' }]; // placeholder
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const onClickCheckout = async (data) => {
     const sale = {
-      sale: { ...data, totalPrice: totalCart },
+      sale: { ...data, totalPrice: totalCart.toFixed(2) },
       products: cartItems
         .map((item) => ({
           productId: item.id,
@@ -68,7 +68,7 @@ export default function Checkout() {
             <input
               data-testid="customer_checkout__input-address"
               type="text"
-              { ...register('deliveryAdress') }
+              { ...register('deliveryAddress') }
             />
           </label>
           <label

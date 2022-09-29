@@ -20,14 +20,14 @@ const Attributes = {
     field: 'seller_id',
   },
   totalPrice: {
-    type: DataTypes.STRING,
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     field: 'total_price',
   },
-  deliveryAdress: {
+  deliveryAddress: {
     type: DataTypes.STRING,
     allowNull: false,
-    field: 'delivery_adress',
+    field: 'delivery_address',
   },
   deliveryNumber: {
     type: DataTypes.STRING,
@@ -42,7 +42,7 @@ const Attributes = {
   status: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 'PENDENTE'
+    defaultValue: 'Pendente'
   }
 };
 
