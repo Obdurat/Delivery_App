@@ -20,9 +20,7 @@ export default function Header() {
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
         onClick={ () => {
-          if (user.role === 'customer') {
-            navigate('/customer/orders');
-          }
+          navigate(`/${user?.role}/orders`);
         } }
       >
         {
