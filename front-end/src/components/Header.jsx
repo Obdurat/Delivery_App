@@ -1,9 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/providers/useAuth';
+import { removeUser } from '../utils/localStorage';
 
 export default function Header() {
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
 
   const titles = {
     customer: 'Meus Pedidos',
@@ -48,7 +49,7 @@ export default function Header() {
         data-testid="customer_products__element-navbar-link-logout"
         type="button"
         onClick={ () => {
-          setUser({});
+          removeUser();
           navigate('/login');
         } }
       >
