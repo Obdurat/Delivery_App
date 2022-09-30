@@ -18,6 +18,7 @@ export function UserProvider({ children }) {
   const [userOrders, setUserOrders] = useState([]);
   const [orderId, setOrderId] = useState('');
   const [detailsOrder, setDetailsOrder] = useState({});
+  const [upStatus, setUpStatus] = useState(true);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export function UserProvider({ children }) {
         }
       })();
     }
-  }, [user, delUser, orderId]);
+  }, [user, delUser, orderId, upStatus]);
 
   const deleteUser = useCallback(async (id) => {
     await ProviderApi.deleteUser(user.token, id);
@@ -57,6 +58,8 @@ export function UserProvider({ children }) {
       detailsOrder,
       setOrderId,
       findSeller,
+      upStatus,
+      setUpStatus,
     }), [
     users,
     deleteUser,
@@ -64,8 +67,9 @@ export function UserProvider({ children }) {
     detailsOrder,
     setOrderId,
     findSeller,
+    upStatus,
+    setUpStatus,
   ]);
-  console.log(detailsOrder);
 
   return <UserContext.Provider value={ value }>{children}</UserContext.Provider>;
 }

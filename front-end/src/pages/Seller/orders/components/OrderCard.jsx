@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 export default function OrderCard({ order: {
   id,
@@ -31,7 +32,7 @@ export default function OrderCard({ order: {
       <div
         data-testid={ `seller_orders__element-order-date-${id}` }
       >
-        { saleDate }
+        { moment(saleDate).format('DD/MM/YYYY') }
       </div>
       <div
         data-testid={ `seller_orders__element-card-price-${id}` }
