@@ -6,6 +6,7 @@ import { useAuth } from '../../context/providers/useAuth';
 import ProviderApi from '../../services/api';
 import Header from '../../components/Header';
 import UsersList from './components/UsersList';
+import { useUsers } from '../../context/providers/UserProvider';
 
 const SIX = 6;
 
@@ -19,6 +20,7 @@ const validationSchema = Yup.object().shape({
 export default function Manage() {
   const roles = ['seller', 'customer', 'administrator'];
   const { user } = useAuth();
+  const { setRefresh } = useUsers();
 
   const { handleSubmit,
     register, formState: {
@@ -86,6 +88,7 @@ export default function Manage() {
           type="submit"
           disabled={ !isDirty || !isValid }
           data-testid="admin_manage__button-register"
+          onClick={ () => setRefresh(true) }
         >
           register
         </button>

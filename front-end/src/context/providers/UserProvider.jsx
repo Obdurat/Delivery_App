@@ -14,11 +14,10 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [users, setUsers] = useState([]);
-  const [delUser, setDelUser] = useState(true);
+  const [refresh, setRefresh] = useState(false);
   const [userOrders, setUserOrders] = useState([]);
   const [orderId, setOrderId] = useState('');
   const [detailsOrder, setDetailsOrder] = useState({});
-  const [upStatus, setUpStatus] = useState(true);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -30,21 +29,23 @@ export function UserProvider({ children }) {
           .getCustomerOrderById(user.token, orderId);
         if (userRes.success) {
           setUsers(userRes.data);
+          setRefresh(false);
         }
         if (userOrderRes.success) {
           setUserOrders(userOrderRes.data);
+          setRefresh(false);
         }
         if (userOrderDetailsRes.success) {
           setDetailsOrder(userOrderDetailsRes.data);
         }
       })();
     }
-  }, [user, delUser, orderId, upStatus]);
+  }, [user, refresh, orderId]);
 
   const deleteUser = useCallback(async (id) => {
     await ProviderApi.deleteUser(user.token, id);
-    setDelUser(!delUser);
-  }, [delUser, user.token]);
+    setRefresh(true);
+  }, [user.token]);
 
   const findSeller = useCallback((sellerId) => (
     users.filter((item) => item.id === sellerId)
@@ -58,8 +59,7 @@ export function UserProvider({ children }) {
       detailsOrder,
       setOrderId,
       findSeller,
-      upStatus,
-      setUpStatus,
+      setRefresh,
     }), [
     users,
     deleteUser,
@@ -67,8 +67,7 @@ export function UserProvider({ children }) {
     detailsOrder,
     setOrderId,
     findSeller,
-    upStatus,
-    setUpStatus,
+    setRefresh,
   ]);
 
   return <UserContext.Provider value={ value }>{children}</UserContext.Provider>;

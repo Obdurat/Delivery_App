@@ -7,7 +7,7 @@ import { useUsers } from '../../../context/providers/UserProvider';
 import OrderProducts from '../../Seller/orders/components/OrderProducts';
 
 export default function CustomerOrderDetails() {
-  const { findSeller, detailsOrder, setOrderId, upStatus, setUpStatus } = useUsers();
+  const { findSeller, detailsOrder, setOrderId, setRefresh } = useUsers();
   const { updateOrderStatus } = useSales();
   const { id } = useParams();
   const prefix = 'customer_order_details__element';
@@ -26,7 +26,7 @@ export default function CustomerOrderDetails() {
 
   const statusBtn = async ({ target }) => {
     await updateOrderStatus({ status: target.value }, id);
-    setUpStatus(!upStatus);
+    setRefresh(true);
   };
 
   return (
