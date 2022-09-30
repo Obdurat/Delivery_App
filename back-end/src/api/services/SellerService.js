@@ -18,7 +18,7 @@ class SellerService extends BaseService {
     });
     if (!request) throw new CustomError([], 404);
     return request;
-}
+  }
 }
 
 module.exports = SellerService;

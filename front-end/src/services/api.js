@@ -72,6 +72,24 @@ const createSale = async (token, data) => {
   return res;
 };
 
+const getSalesById = async (token) => {
+  const res = await request('/customer/sales/', statusCode.OK, 'get', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
+const getCustomerOrderById = async (id, token) => {
+  const res = await request(`/customer/sales/${id}`, statusCode.OK, 'get', {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res;
+};
+
 const getUsers = async (token) => {
   const res = await request('/admin/manage/users', statusCode.OK, 'get', {
     headers: {
@@ -98,6 +116,8 @@ const ProviderApi = {
   updateOrderStatus,
   adminRegister,
   createSale,
+  getSalesById,
+  getCustomerOrderById,
   getUsers,
   deleteUser,
 };
