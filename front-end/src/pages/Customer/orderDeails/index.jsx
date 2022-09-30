@@ -30,7 +30,7 @@ export default function CustomerOrderDetails() {
   return (
     <>
       <Header />
-      { detailsOrder
+      { status
       && (
         <div>
           <div
@@ -56,27 +56,18 @@ export default function CustomerOrderDetails() {
           </div>
           <button
             type="button"
-            value="Preparando"
-            data-testid="customer_order_details__button-preparing-check"
+            value="Entregue"
+            data-testid="customer_order_details__button-delivery-check"
             onClick={ statusBtn }
-            disabled={ status !== 'Pendente' }
+            disabled={ status !== 'Em Trânsito' }
           >
-            Preparar Pedido
-          </button>
-          <button
-            type="button"
-            value="Em Trânsito"
-            data-testid="customer_order_details__button-dispatch-check"
-            onClick={ statusBtn }
-            disabled={ status !== 'Preparando' }
-          >
-            Saiu para Entrega
+            Marcar como entregue
           </button>
           <OrderProducts products={ products } />
           <div
             data-testid="customer_order_details__element-order-total-price"
           >
-            {Number(totalPrice).toFixed(2).replace(/\./, ',')}
+            {totalPrice.replace(/\./, ',')}
           </div>
         </div>
       )}

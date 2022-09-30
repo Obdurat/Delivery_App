@@ -26,7 +26,7 @@ export function UserProvider({ children }) {
         const userRes = await ProviderApi.getUsers(user.token);
         const userOrderRes = await ProviderApi.getSalesById(user.token);
         const userOrderDetailsRes = await ProviderApi
-          .getCustomerOrderById(orderId, user.token);
+          .getCustomerOrderById(user.token, orderId);
         if (userRes.success) {
           setUsers(userRes.data);
         }

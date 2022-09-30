@@ -81,7 +81,7 @@ const getSalesById = async (token) => {
   return res;
 };
 
-const getCustomerOrderById = async (id, token) => {
+const getCustomerOrderById = async (token, id) => {
   const res = await request(`/customer/sales/${id}`, statusCode.OK, 'get', {
     headers: {
       Authorization: token,
