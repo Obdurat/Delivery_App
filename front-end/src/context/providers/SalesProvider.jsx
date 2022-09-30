@@ -16,20 +16,22 @@ export function SalesProvider({ children }) {
   const [orders, setOrders] = useState([]);
   const [orderDetails, setOrderDetails] = useState({});
   const [orderId, setOrderId] = useState('');
-  const [upStatus, setUpStatus] = useState(true);
+  const [upStatus, setUpStatus] = useState(false);
 
   const { user } = useAuth();
 
   useEffect(() => {
-    if (user.token) {
+    if (user.token && user.role === 'seller') {
       (async () => {
         const allOrders = await ProviderApi.getSellerOrders(user.token);
         const orderById = await ProviderApi.getOrderById(user.token, orderId);
         if (allOrders.success) {
           setOrders(allOrders.data);
+          setUpStatus(false);
         }
         if (orderById.success) {
           setOrderDetails(orderById.data);
+          setUpStatus(false);
         }
       })();
     }
@@ -37,8 +39,8 @@ export function SalesProvider({ children }) {
 
   const updateOrderStatus = useCallback(async (data, id) => {
     await ProviderApi.updateOrderStatus(user.token, data, id);
-    setUpStatus(!upStatus);
-  }, [user, upStatus]);
+    setUpStatus(true);
+  }, [user]);
 
   const value = useMemo(() => ({
     orders,
