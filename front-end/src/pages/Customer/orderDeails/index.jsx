@@ -10,6 +10,7 @@ export default function CustomerOrderDetails() {
   const { findSeller, detailsOrder, setOrderId } = useUsers();
   const { updateOrderStatus } = useSales();
   const { id } = useParams();
+  const prefix = 'customer_order_details__element';
 
   const {
     sellerId,
@@ -34,23 +35,22 @@ export default function CustomerOrderDetails() {
       && (
         <div>
           <div
-            data-testid="customer_order_details__element-order-details-label-order-id"
+            data-testid={ `${prefix}-order-details-label-order-id` }
           >
             { id }
           </div>
           <div
-            data-testid="customer_order_details__element-order-details-label-seller-name"
+            data-testid={ `${prefix}-order-details-label-seller-name` }
           >
             { findSeller(sellerId)[0].name }
           </div>
           <div
-            data-testid="customer_order_details__element-order-details-label-order-date"
+            data-testid={ `${prefix}-order-details-label-order-date` }
           >
             { moment(saleDate).format('DD/MM/YYYY') }
           </div>
           <div
-            data-testid="customer_order_details__
-              element-order-details-label-delivery-status"
+            data-testid={ `${prefix}-order-details-label-delivery-status` }
           >
             { status }
           </div>
@@ -65,7 +65,7 @@ export default function CustomerOrderDetails() {
           </button>
           <OrderProducts products={ products } />
           <div
-            data-testid="customer_order_details__element-order-total-price"
+            data-testid={ `${prefix}-order-total-price` }
           >
             {totalPrice.replace(/\./, ',')}
           </div>
