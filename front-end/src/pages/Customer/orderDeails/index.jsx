@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import moment from 'moment';
 import Header from '../../../components/Header';
 import { useSales } from '../../../context/providers/SalesProvider';
 import { useUsers } from '../../../context/providers/UserProvider';
 import OrderProducts from '../../Seller/orders/components/OrderProducts';
 
 export default function CustomerOrderDetails() {
-  const { users, detailsOrder, setOrderId } = useUsers();
+  const { findSeller, detailsOrder, setOrderId, upStatus, setUpStatus } = useUsers();
   const { updateOrderStatus } = useSales();
   const { id } = useParams();
+  const prefix = 'customer_order_details__element';
 
   const {
     sellerId,
@@ -18,69 +20,55 @@ export default function CustomerOrderDetails() {
     products,
   } = detailsOrder;
 
-  const seller = users.filter((item) => item.id === sellerId);
-  console.log('🚀 ~ seller', users, sellerId);
-
   useEffect(() => {
     setOrderId(id);
   }, [setOrderId, id]);
 
   const statusBtn = async ({ target }) => {
     await updateOrderStatus({ status: target.value }, id);
+    setUpStatus(!upStatus);
   };
-
-  // const prefix = 'customer_order_details__element';
 
   return (
     <>
       <Header />
-      { detailsOrder
+      { status
       && (
         <div>
           <div
-            data-testid="customer_order_details__element-order-details-label-order-id"
+            data-testid={ `${prefix}-order-details-label-order-id` }
           >
             { id }
           </div>
           <div
-            data-testid="customer_order_details__element-order-details-label-seller-name"
+            data-testid={ `${prefix}-order-details-label-seller-name` }
           >
-            { seller[0].name }
+            { findSeller(sellerId)[0].name }
           </div>
           <div
-            data-testid="customer_order_details__element-order-details-label-order-date"
+            data-testid={ `${prefix}-order-details-label-order-date` }
           >
             { moment(saleDate).format('DD/MM/YYYY') }
           </div>
           <div
-            data-testid="customer_order_details__
-              element-order-details-label-delivery-status"
+            data-testid={ `${prefix}-order-details-label-delivery-status` }
           >
             { status }
           </div>
           <button
             type="button"
-            value="Preparando"
-            data-testid="customer_order_details__button-preparing-check"
+            value="Entregue"
+            data-testid="customer_order_details__button-delivery-check"
             onClick={ statusBtn }
-            disabled={ status !== 'Pendente' }
+            disabled={ status !== 'Em Trânsito' }
           >
-            Preparar Pedido
-          </button>
-          <button
-            type="button"
-            value="Em Trânsito"
-            data-testid="customer_order_details__button-dispatch-check"
-            onClick={ statusBtn }
-            disabled={ status !== 'Preparando' }
-          >
-            Saiu para Entrega
+            Marcar como entregue
           </button>
           <OrderProducts products={ products } />
           <div
-            data-testid="customer_order_details__element-order-total-price"
+            data-testid={ `${prefix}-order-total-price` }
           >
-            {Number(totalPrice).toFixed(2).replace(/\./, ',')}
+            {totalPrice.replace(/\./, ',')}
           </div>
         </div>
       )}

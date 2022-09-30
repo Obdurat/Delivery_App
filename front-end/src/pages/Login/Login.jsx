@@ -28,17 +28,18 @@ export default function Login() {
   useEffect(() => {
     const userValid = getFromLocalStorage('user');
     if (userValid) {
-      setUser({ ...userValid });
-      const { role } = userValid;
-      const redirectOptions = {
-        administrator: '/admin/manage',
-        seller: '/seller/orders',
-        customer: '/customer/products',
-      };
-      navigate(redirectOptions[role]);
+      (() => {
+        setUser({ ...userValid });
+        const { role } = userValid;
+        const redirectOptions = {
+          administrator: '/admin/manage',
+          seller: '/seller/orders',
+          customer: '/customer/products',
+        };
+        navigate(redirectOptions[role]);
+      })();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate, setUser]);
 
   const onSubmit = async (data) => {
     const res = await ProviderApi.login(data);

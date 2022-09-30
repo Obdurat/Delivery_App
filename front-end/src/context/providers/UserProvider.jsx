@@ -18,6 +18,7 @@ export function UserProvider({ children }) {
   const [userOrders, setUserOrders] = useState([]);
   const [orderId, setOrderId] = useState('');
   const [detailsOrder, setDetailsOrder] = useState({});
+  const [upStatus, setUpStatus] = useState(true);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -26,24 +27,28 @@ export function UserProvider({ children }) {
         const userRes = await ProviderApi.getUsers(user.token);
         const userOrderRes = await ProviderApi.getSalesById(user.token);
         const userOrderDetailsRes = await ProviderApi
-          .getCustomerOrderById(orderId, user.token);
-        if (userOrderDetailsRes.success) {
-          setDetailsOrder(userOrderDetailsRes.data);
-        }
+          .getCustomerOrderById(user.token, orderId);
         if (userRes.success) {
           setUsers(userRes.data);
         }
         if (userOrderRes.success) {
           setUserOrders(userOrderRes.data);
         }
+        if (userOrderDetailsRes.success) {
+          setDetailsOrder(userOrderDetailsRes.data);
+        }
       })();
     }
-  }, [user, delUser, orderId]);
+  }, [user, delUser, orderId, upStatus]);
 
   const deleteUser = useCallback(async (id) => {
     await ProviderApi.deleteUser(user.token, id);
     setDelUser(!delUser);
   }, [delUser, user.token]);
+
+  const findSeller = useCallback((sellerId) => (
+    users.filter((item) => item.id === sellerId)
+  ), [users]);
 
   const value = useMemo(() => (
     {
@@ -52,14 +57,19 @@ export function UserProvider({ children }) {
       userOrders,
       detailsOrder,
       setOrderId,
+      findSeller,
+      upStatus,
+      setUpStatus,
     }), [
     users,
     deleteUser,
     userOrders,
     detailsOrder,
     setOrderId,
+    findSeller,
+    upStatus,
+    setUpStatus,
   ]);
-  console.log(detailsOrder);
 
   return <UserContext.Provider value={ value }>{children}</UserContext.Provider>;
 }
