@@ -9,7 +9,7 @@ class LoginService extends BaseService {
     const user = await this.model.findOne({ where: { email } });
 
     if (!user || user.password !== md5Hash) throw new CustomError('Not found', 404);
-    const { password, ...rest } = user.get();
+    const { password, ...rest } = user;
     const token = tokenGenerator(rest);
 
     return ({ user: rest, ...token });

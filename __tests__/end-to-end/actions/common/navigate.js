@@ -17,7 +17,6 @@ const navigate = {
       await expect(page).toNavigate(`${host}/login`);
       await expect(page).toCompareURL(`${host}/login`);
       await expect(page).toTypeInInput(loginPage.input.login, email);
-      console.log(loginPage.input.login, email);
       await expect(page).toTypeInInput(loginPage.input.password, md5Translate);
 
       await expect(page).toWaitReqFinished({
