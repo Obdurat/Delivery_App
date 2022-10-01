@@ -34,4 +34,14 @@ describe('login route tests', () => {
     expect(body.token).to.be.an('string');
     expect(user).to.be.deep.equal(loginResponse[0].customer)
   });
+
+  it('returns error when wrong password', async () => {
+    const { body, status } = await chai
+      .request(app)
+      .post('/login')
+      .send({ ...users[0].customer, password: 'wrongPass'});
+
+    expect(status).to.be.eq(404);
+    expect(body.message).to.be.eq('Not found');
+  });
 });

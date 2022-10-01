@@ -1,7 +1,7 @@
 const users = [{
   customer: {
-    "email": "zebirita@email.com",
-    "password": "$#zebirita#$",
+    email: "zebirita@email.com",
+    password: "$#zebirita#$",
   },
   seller: {
     email: 'fulana@deliveryapp.com',
