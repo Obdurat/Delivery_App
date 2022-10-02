@@ -13,16 +13,15 @@ class BaseService {
 
     async create(body) {
         const passwordEncrypted = passwordHash(body.password);
-        const [request, created] = await this.model.findOrCreate({
-            where: { email: body.email },
-            defaults: { ...body, password: passwordEncrypted },
-        });        
-        if (!created) throw new CustomError('User allready exists', 409);        
-        const payload = request.dataValues;
-        delete payload.password;
+        const userExists = await this.model.findOne({ where: { email: body.email } })      
+        if (userExists) throw new CustomError('User allready exists', 409);
+        const { dataValues } = await this.model.create({
+          ...body, password: passwordEncrypted,
+        });
+        delete dataValues.password;
 
-        const token = tokenGenerator(payload);
-        return ({ ...payload, ...token });
+        const token = tokenGenerator(dataValues);
+        return { ...dataValues, ...token };
     }
 
     async getAll() {

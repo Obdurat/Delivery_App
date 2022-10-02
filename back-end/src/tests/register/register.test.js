@@ -15,7 +15,10 @@ const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf-8');
 describe('register route tests', () => {
   beforeEach(async () => {
     sinon
-      .stub(Models.users, 'findOrCreate')
+      .stub(Models.users, 'findOne')
+      .resolves(null);
+    sinon
+      .stub(Models.users, 'create')
       .resolves(resolve);
   });
 
@@ -26,11 +29,9 @@ describe('register route tests', () => {
       .request(app)
       .post('/register')
       .send(newUser);
-    console.log('🚀 ~ it ~ body', body);
 
-    // expect(status).to.be.eq(200);
-    // expect(body.user).to.be.deep.equal(loginResponse[0].customer);
-    // expect(body.token).to.be.an('string');
-    // expect(user).to.be.deep.equal(loginResponse[0].customer)
+    expect(status).to.be.eq(201);
+    expect(body).to.nested.include(response);
+    expect(body.token).to.be.an('string');
   });
 });
