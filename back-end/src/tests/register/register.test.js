@@ -1,22 +1,16 @@
 const sinon =  require('sinon');
-const { verify } = require('jsonwebtoken');
-const fs = require('fs');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../../api/app');
 const Models = require('../../database/models');
 const { newUser, response, resolve } = require('../mocks/registerMock');
+const { users } = require('../mocks/loginMock');
 
 const { expect } = chai;
 chai.use(chaiHttp);
 
-const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf-8');
-
 describe('register route tests', () => {
   beforeEach(async () => {
-    sinon
-      .stub(Models.users, 'findOne')
-      .resolves(null);
     sinon
       .stub(Models.users, 'create')
       .resolves(resolve);
@@ -24,7 +18,11 @@ describe('register route tests', () => {
 
   afterEach(() => sinon.restore());
 
-  it('successfully login', async () => {
+  it('successfully create account', async () => {
+    sinon
+      .stub(Models.users, 'findOne')
+      .resolves();
+
     const { body, status } = await chai
       .request(app)
       .post('/register')
@@ -33,5 +31,19 @@ describe('register route tests', () => {
     expect(status).to.be.eq(201);
     expect(body).to.nested.include(response);
     expect(body.token).to.be.an('string');
+  });
+
+  it('returns error when user exists', async () => {
+    sinon
+      .stub(Models.users, 'findOne')
+      .resolves({ ...users[0].customer, name: 'Cliente Zé Birita' });
+
+    const { body, status } = await chai
+      .request(app)
+      .post('/register')
+      .send(newUser);
+
+    expect(status).to.be.eq(409);
+    expect(body.message).to.be.eq('User allready exists');
   });
 });
