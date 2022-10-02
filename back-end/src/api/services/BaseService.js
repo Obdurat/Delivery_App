@@ -18,11 +18,11 @@ class BaseService {
             defaults: { ...body, password: passwordEncrypted },
         });        
         if (!created) throw new CustomError('User allready exists', 409);        
-        const payload = request.get();
-        if (payload.password) { delete payload.password; }
+        const payload = request.dataValues;
+        delete payload.password;
 
         const token = tokenGenerator(payload);
-        return ({ ...payload, token });
+        return ({ ...payload, ...token });
     }
 
     async getAll() {
