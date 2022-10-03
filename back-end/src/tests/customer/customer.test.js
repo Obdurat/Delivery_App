@@ -16,16 +16,7 @@ chai.use(chaiHttp);
 
 describe('customer route tests', () => {
   beforeEach(async () => {
-    sinon
-      .stub(controller, 'getAll')
-      .resolves(customerResponse);
-    sinon
-      .stub(controller, 'getSalesById')
-      .resolves(customerResponse);
-    sinon
-      .stub(controller, 'createSale')
-      .resolves();
-
+    sinon.stub(controller);
     await chai
       .request(app)
       .post('/customer/checkout')
@@ -57,6 +48,27 @@ describe('customer route tests', () => {
         expect(res.body).to.be.deep.eq({
           ...allSales, saleDate: res.body.saleDate,
         });
+      });
+  });
+
+  it('returns all customer orders', async () => {
+    await chai
+      .request(app)
+      .get('/customer/sales')
+      .set('Authorization', token)
+      .then((res) => {
+        expect(res.status).to.be.eq(200);
+        expect(res.body).to.be.an('array');
+        res.body.map((obj) => {
+          expect(obj).to.have.property('id');
+          expect(obj).to.have.property('userId');
+          expect(obj).to.have.property('sellerId');
+          expect(obj).to.have.property('totalPrice');
+          expect(obj).to.have.property('deliveryAddress');
+          expect(obj).to.have.property('deliveryNumber');
+          expect(obj).to.have.property('saleDate');
+          expect(obj).to.have.property('status');
+        })
       });
   });
 });
