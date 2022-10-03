@@ -1,5 +1,4 @@
 const BaseService = require('./BaseService');
-const CustomError = require('../errors/CustomError');
 const Models = require('../../database/models');
 
 class SellerService extends BaseService {
@@ -7,7 +6,6 @@ class SellerService extends BaseService {
     const sales = await this.model.findAll({
       where: { sellerId },
     });    
-    if (sales.length === 0) throw new CustomError([], 404);  
     return sales;
   }
 
@@ -16,7 +14,6 @@ class SellerService extends BaseService {
       where: { id },
       include: [{ model: Models.products, as: 'products' }],
     });
-    if (!request) throw new CustomError([], 404);
     return request;
   }
 }
