@@ -22,6 +22,7 @@ export default function Checkout() {
           productId: item.id,
           quantity: item.quantity,
         })) };
+    console.log('🚀 ~ onClickCheckout ~ sale', sale);
     const res = await ProviderApi.createSale(user.token, sale);
     if (res.success) {
       navigate(`/customer/orders/${res.data[0].saleId}`);

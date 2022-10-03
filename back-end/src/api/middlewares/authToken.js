@@ -14,7 +14,7 @@ const authToken = (req, _res, next) => {
   if (!token) throw new CustomError('Token Not Found');
 
   verify(token, SECRET, (error, user) => {
-    if (error) throw new CustomError('Invalid Token');
+    if (error) throw new CustomError('Invalid Token', 401);
     req.user = user;
   });
   next();

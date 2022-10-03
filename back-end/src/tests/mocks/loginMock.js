@@ -21,7 +21,7 @@ const resolve = [{
     password: "1c37466c159755ce1fa181bd247cb925",
     role: "customer",
   },
-}]
+}];
 
 const loginResponse = [{
   customer: {
@@ -30,6 +30,8 @@ const loginResponse = [{
     email: "zebirita@email.com",
     role: "customer",
   },
-}]
+}];
 
-module.exports = { users, loginResponse, resolve };
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IkNsaWVudGUgWsOpIEJpcml0YSIsImVtYWlsIjoiemViaXJpdGFAZW1haWwuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjY0NzI4NjUwLCJleHAiOjE2OTYyNjQ2NTB9.zrdoeBHkMUxRvecwdZRqqJ7gDuTgiQkOGraYnLMesUw";
+
+module.exports = { users, loginResponse, resolve, token };

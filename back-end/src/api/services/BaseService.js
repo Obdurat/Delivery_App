@@ -13,7 +13,7 @@ class BaseService {
 
     async create(body) {
         const passwordEncrypted = passwordHash(body.password);
-        const userExists = await this.model.findOne({ where: { email: body.email } })      
+        const userExists = await this.model.findOne({ where: { email: body.email } });
         if (userExists) throw new CustomError('User allready exists', 409);
         const { dataValues } = await this.model.create({
           ...body, password: passwordEncrypted,
