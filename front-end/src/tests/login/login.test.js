@@ -2,7 +2,8 @@ import React from 'react';
 import { screen, cleanup, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../../App';
-import { users } from '../mocks/loginMock';
+import { administrator, customer, seller, users } from '../mocks/loginMock';
+import { saveUser } from '../../utils/localStorage';
 
 const EMAIL_ID = 'common_login__input-email';
 const PASSWORD_ID = 'common_login__input-password';
@@ -25,7 +26,8 @@ describe('Customer Login tests', () => {
     expect(screen.getByTestId(REGISTER_BTN)).toBeInTheDocument();
   });
 
-  it('login success', async () => {
+  it('customer login success', async () => {
+    saveUser(customer);
     const emailLogin = screen.getByTestId(EMAIL_ID);
     const password = screen.getByTestId(PASSWORD_ID);
     const btn = screen.getByTestId(LOGIN_BTN);
@@ -44,30 +46,48 @@ describe('Customer Login tests', () => {
       expect(window.location.pathname).toBe('/login');
     });
   });
+
+  describe('Seller Login tests', () => {
+    it('seller login success', async () => {
+      saveUser(seller);
+      const emailLogin = screen.getByTestId(EMAIL_ID);
+      const password = screen.getByTestId(PASSWORD_ID);
+      const btn = screen.getByTestId(LOGIN_BTN);
+
+      userEvent.type(emailLogin, users.seller.email);
+      userEvent.type(password, users.seller.password);
+
+      await waitFor(() => {
+        userEvent.click(btn);
+        expect(window.location.pathname).toBe('/seller/orders');
+        expect(screen.getByTestId(linkOrders)).toBeInTheDocument();
+        expect(screen.getByTestId(linkFullName)).toBeInTheDocument();
+        expect(screen.getByTestId(linkLogout)).toBeInTheDocument();
+        userEvent.click(screen.getByTestId(linkLogout));
+        expect(window.location.pathname).toBe('/login');
+      });
+    });
+  });
+
+  describe('Admin Login tests', () => {
+    it('admin login success', async () => {
+      saveUser(administrator);
+      const emailLogin = screen.getByTestId(EMAIL_ID);
+      const password = screen.getByTestId(PASSWORD_ID);
+      const btn = screen.getByTestId(LOGIN_BTN);
+
+      userEvent.type(emailLogin, users.administrator.email);
+      userEvent.type(password, users.administrator.password);
+
+      await waitFor(() => {
+        userEvent.click(btn);
+        expect(window.location.pathname).toBe('/admin/manage');
+        expect(screen.getByTestId(linkOrders)).toBeInTheDocument();
+        expect(screen.getByTestId(linkFullName)).toBeInTheDocument();
+        expect(screen.getByTestId(linkLogout)).toBeInTheDocument();
+        userEvent.click(screen.getByTestId(linkLogout));
+        expect(window.location.pathname).toBe('/login');
+      });
+    });
+  });
 });
-
-// describe('Seller Login tests', () => {
-//   beforeEach(() => render(<App />));
-
-//   afterEach(cleanup);
-
-//   it('login success', async () => {
-//     const emailLogin = screen.getByTestId(EMAIL_ID);
-//     const password = screen.getByTestId(PASSWORD_ID);
-//     const btn = screen.getByTestId(LOGIN_BTN);
-
-//     userEvent.type(emailLogin, users.seller.email);
-//     userEvent.type(password, users.seller.password);
-
-//     await waitFor(() => {
-//       userEvent.click(btn);
-//       expect(window.location.pathname).toBe('/seller/orders');
-//       expect(screen.getByTestId(linkOrders)).toBeInTheDocument();
-//       expect(screen.getByTestId(linkProducts)).toBeInTheDocument();
-//       expect(screen.getByTestId(linkFullName)).toBeInTheDocument();
-//       expect(screen.getByTestId(linkLogout)).toBeInTheDocument();
-//       userEvent.click(screen.getByTestId(linkLogout));
-//       expect(window.location.pathname).toBe('/login');
-//     });
-//   });
-// });

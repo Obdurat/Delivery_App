@@ -19,6 +19,16 @@ const seller = {
   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkZ1bGFuYSBQZXJlaXJhIiwiZW1haWwiOiJmdWxhbmFAZGVsaXZlcnlhcHAuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTY2NDg2NTgxNiwiZXhwIjoxNjk2NDAxODE2fQ.42PJkP3r7wz1IzMeUS4zK9dRa0894UEYoznxwyRmZtQ',
 };
 
+const administrator = {
+  user: {
+    id: 1,
+    name: 'Delivery App Admin',
+    email: 'adm@deliveryapp.com',
+    role: 'administrator',
+  },
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjY0ODY4OTk0LCJleHAiOjE2OTY0MDQ5OTR9.OkE-iPfwmrX12SGJ5j_Q-5EdOxXj8SbHFlrdYSEicYw',
+};
+
 const users = {
   customer: {
     email: 'zebirita@email.com',
@@ -34,4 +44,4 @@ const users = {
   },
 };
 
-export { users, customer, seller };
+export { users, customer, seller, administrator };
