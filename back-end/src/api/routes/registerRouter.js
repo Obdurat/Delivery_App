@@ -1,13 +1,13 @@
 const express = require('express');
 const Models = require('../../database/models');
-const CustomerController = require('../controllers/CustomerController');
-const CustomerService = require('../services/CustomerService');
+const RegisterController = require('../controllers/RegisterController');
+const RegisterService = require('../services/RegisterService');
 const customerValidation = require('../middlewares/customerValidation');
 
 // Padrão de instanciar as classes nas Routas ??? Se prefirirem fazemos Factory
 
-const Service = new CustomerService(Models.users);
-const Controller = new CustomerController(Service);
+const Service = new RegisterService(Models.users);
+const Controller = new RegisterController(Service);
 
 const Endpoints = express.Router();
 

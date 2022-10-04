@@ -13,7 +13,7 @@ const Controller = new CustomerController(Service);
 const Endpoints = express.Router();
 
 Endpoints.route('/manage')
-    .post(adminValidation, Controller.create);
+    .post(authToken, adminValidation, Controller.create);
 
 Endpoints.route('/manage/users')
     .get(authToken, Controller.getAll);

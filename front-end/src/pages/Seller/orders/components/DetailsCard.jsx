@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import { useSales } from '../../../../context/providers/SalesProvider';
 import OrderProducts from './OrderProducts';
 
@@ -29,7 +28,7 @@ export default function DetailsCard({
       <div
         data-testid="seller_order_details__element-order-details-label-order-date"
       >
-        { moment(saleDate).format('DD/MM/YYYY') }
+        { new Date(saleDate).toLocaleDateString('pt-BR') }
       </div>
       <div
         data-testid="seller_order_details__element-order-details-label-delivery-status"

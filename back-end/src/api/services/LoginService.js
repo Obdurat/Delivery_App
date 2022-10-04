@@ -6,13 +6,13 @@ const encryptPassword = require('../utils/passwordHash');
 class LoginService extends BaseService {
   async login(email, pass) {
     const md5Hash = encryptPassword(pass);
-    const user = await this.model.findOne({ where: { email } });
+    const user = await this.model.findOne({ where: { email }, raw: true });
 
     if (!user || user.password !== md5Hash) throw new CustomError('Not found', 404);
-    const { password, ...rest } = user.get();
-    const token = tokenGenerator(rest);
+    delete user.password;
+    const token = tokenGenerator(user);
 
-    return ({ user: rest, ...token });
+    return ({ user, ...token });
   }
 }
 

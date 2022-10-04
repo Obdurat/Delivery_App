@@ -33,7 +33,7 @@ class CustomerService extends BaseService {
     }
 
     async getOne(id) {
-        const request = await this.model.findOne({
+        const request = await this.assct.sales.findOne({
           where: { id },
           include: [{ model: Models.products, as: 'products' }],
         });
