@@ -158,20 +158,25 @@ describe('Customer page tests', () => {
     await waitFor(() => {
       userEvent.click(btn);
       const addBtn = screen.getByTestId(`${ADD_ITEM}1`);
+      const removeCartItem = screen.getByTestId(`${RM_ITEM}1`);
       userEvent.click(addBtn);
+      userEvent.click(addBtn);
+      userEvent.click(removeCartItem);
       const checkoutBtn = screen.getByTestId(CART_BTN);
       userEvent.click(checkoutBtn);
       const input1 = screen.getByTestId(INPUT_ADDRESS);
       const input2 = screen.getByTestId(INPUT_ADDRESS_NUMBER);
+      const rmBtn = screen.getByTestId(REMOVE_BTN);
       expect(screen.getByTestId(ITEM_NUMBER)).toBeInTheDocument();
       expect(screen.getByTestId(ITEM_NAME)).toBeInTheDocument();
       expect(screen.getByTestId(ITEM_QUANTITY)).toBeInTheDocument();
       expect(screen.getByTestId(ITEM_PRICE)).toBeInTheDocument();
       expect(screen.getByTestId(CART_SUB_TOTAL)).toBeInTheDocument();
-      expect(screen.getByTestId(REMOVE_BTN)).toBeInTheDocument();
+      expect(rmBtn).toBeInTheDocument();
       expect(screen.getByTestId(CART_TOTAL_PRICE)).toBeInTheDocument();
       expect(screen.getByTestId(SUBMIT_BTN)).toBeInTheDocument();
-
+      userEvent.click(rmBtn);
+      expect(rmBtn).not.toBeInTheDocument();
       userEvent.type(input1, 'street secret');
       userEvent.type(input2, '66');
       const submitBtn = screen.getByTestId(SUBMIT_BTN);
