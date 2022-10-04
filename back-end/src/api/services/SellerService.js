@@ -1,5 +1,4 @@
 const BaseService = require('./BaseService');
-const Models = require('../../database/models');
 
 class SellerService extends BaseService {
   async getAll(sellerId) {
