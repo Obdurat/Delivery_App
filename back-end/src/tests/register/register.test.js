@@ -46,4 +46,18 @@ describe('register route tests', () => {
     expect(status).to.be.eq(409);
     expect(body.message).to.be.eq('User allready exists');
   });
+
+  it('customer validation error', async () => {
+    sinon
+      .stub(Models.users, 'findOne')
+      .resolves();
+
+    const { body, status } = await chai
+      .request(app)
+      .post('/register')
+      .send({ name: 'wrong' });
+
+    expect(status).to.be.eq(400);
+    expect(body.message).to.be.eq('Name must be at least 12 characters long');
+  });
 });
