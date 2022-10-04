@@ -3,26 +3,24 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../../api/app');
 const Models = require('../../database/models');
-const { newUser, response, resolve } = require('../mocks/registerMock');
-const { users } = require('../mocks/loginMock');
+const { newUser, response } = require('../mocks/registerMock');
+const RegisterService = require('../../api/services/RegisterService');
+const RegisterController = require('../../api/controllers/RegisterController');
+
+const service = new RegisterService(Models.sales);
+const controller = new RegisterController(service);
 
 const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('register route tests', () => {
   beforeEach(async () => {
-    sinon
-      .stub(Models.users, 'create')
-      .resolves(resolve);
+    sinon.stub(controller);
   });
 
   afterEach(() => sinon.restore());
 
   it('successfully create account', async () => {
-    sinon
-      .stub(Models.users, 'findOne')
-      .resolves();
-
     const { body, status } = await chai
       .request(app)
       .post('/register')
@@ -34,10 +32,6 @@ describe('register route tests', () => {
   });
 
   it('returns error when user exists', async () => {
-    sinon
-      .stub(Models.users, 'findOne')
-      .resolves({ ...users[0].customer, name: 'Cliente Zé Birita' });
-
     const { body, status } = await chai
       .request(app)
       .post('/register')
@@ -48,10 +42,6 @@ describe('register route tests', () => {
   });
 
   it('customer validation error', async () => {
-    sinon
-      .stub(Models.users, 'findOne')
-      .resolves();
-
     const { body, status } = await chai
       .request(app)
       .post('/register')
