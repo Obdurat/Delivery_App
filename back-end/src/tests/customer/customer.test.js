@@ -76,4 +76,15 @@ describe('customer route tests', () => {
         })
       });
   });
+
+  it('throws error token not found', async () => {
+    await chai
+      .request(app)
+      .get('/customer/sales')
+      .set('Authorization', '')
+      .then(({ status, body }) => {
+        expect(status).to.be.eq(404);
+        expect(body.message).to.be.eq('Token Not Found');
+      });
+  });
 });

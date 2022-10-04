@@ -11,7 +11,7 @@ const SECRET = fs.readFileSync(
 const authToken = (req, _res, next) => {
   const token = req.headers.authorization || '';
 
-  if (!token) throw new CustomError('Token Not Found');
+  if (!token) throw new CustomError('Token Not Found', 404);
 
   verify(token, SECRET, (error, user) => {
     if (error) throw new CustomError('Invalid Token', 401);
