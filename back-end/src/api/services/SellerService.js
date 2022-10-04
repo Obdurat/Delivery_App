@@ -8,14 +8,6 @@ class SellerService extends BaseService {
     });    
     return sales;
   }
-
-  async getOne(id) {
-    const request = await this.model.findOne({
-      where: { id },
-      include: [{ model: Models.products, as: 'products' }],
-    });
-    return request;
-  }
 }
 
 module.exports = SellerService;

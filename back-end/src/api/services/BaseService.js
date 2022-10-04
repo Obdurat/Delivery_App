@@ -1,3 +1,4 @@
+const Models = require('../../database/models');
 const CustomError = require('../errors/CustomError');
 const passwordHash = require('../utils/passwordHash');
 const tokenGenerator = require('../utils/tokenGenerator');
@@ -30,9 +31,11 @@ class BaseService {
     }
 
     async getOne(id) {
-        const request = await this.model.findOne({ where: { id } });
-        if (!request) throw new CustomError(`${this.model.tableName} does not exist`); // model tableName retorna o nome da tabela
-        return request;
+      const request = await this.model.findOne({
+        where: { id },
+        include: [{ model: Models.products, as: 'products' }],
+      });
+      return request;
     }
 
     async update(id, body) {

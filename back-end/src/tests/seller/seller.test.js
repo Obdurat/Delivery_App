@@ -6,6 +6,7 @@ const Models = require('../../database/models');
 const SellerService = require('../../api/services/SellerService');
 const SellerController = require('../../api/controllers/SellerController');
 const { token, allSales } = require('../mocks/sellerMock');
+const createSale = require('../mocks/createSale');
 
 const service = new SellerService(Models.sales);
 const controller = new SellerController(service);
@@ -14,8 +15,11 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('seller route tests', () => {
+  let createdSale = [];
   beforeEach(async () => {
     sinon.stub(controller);
+    createdSale = await createSale();
+    expect(createdSale.status).to.be.eq(201);
   });
 
   afterEach(() => sinon.restore());
@@ -44,12 +48,21 @@ describe('seller route tests', () => {
   it('returns seller order by id', async () => {
     await chai
       .request(app)
-      .get('/seller/orders/1')
+      .get(`/seller/orders/${createdSale.body[0].saleId}`)
       .set('Authorization', token)
       .then(({ status, body }) => {
         expect(status).to.be.eq(200);
         expect(body).to.be.deep.eq({
-          ...allSales, saleDate: body.saleDate,
+          ...allSales,
+          saleDate: body.saleDate,
+          id: createdSale.body[0].saleId,
+          products: allSales.products.map((elem) => ({
+            ...elem,
+            salesProducts: {
+              ...elem.salesProducts,
+              saleId: createdSale.body[0].saleId,
+            }
+          })),
         });
       });
   });

@@ -5,8 +5,9 @@ const app = require('../../api/app');
 const Models = require('../../database/models');
 const CustomerService = require('../../api/services/CustomerService');
 const CustomerController = require('../../api/controllers/CustomerController');
-const { customerResponse, newSale, allSales } = require('../mocks/customerMock');
+const { customerResponse, allSales } = require('../mocks/customerMock');
 const { token } = require('../mocks/loginMock');
+const createSale = require('../mocks/createSale');
 
 const service = new CustomerService(Models.users, Models);
 const controller = new CustomerController(service);
@@ -15,16 +16,11 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('customer route tests', () => {
+  let createdSale = [];
   beforeEach(async () => {
     sinon.stub(controller);
-    await chai
-      .request(app)
-      .post('/customer/checkout')
-      .send(newSale)
-      .set('Authorization', token)
-      .then((res) => {
-        expect(res.status).to.be.eq(201);
-      })
+    createdSale = await createSale();
+    expect(createdSale.status).to.be.eq(201);
   });
 
   afterEach(() => sinon.restore());
@@ -41,12 +37,21 @@ describe('customer route tests', () => {
   it('returns sale by id', async () => {
     await chai
       .request(app)
-      .get('/customer/sales/1')
+      .get(`/customer/sales/${createdSale.body[0].saleId}`)
       .set('Authorization', token)
-      .then((res) => {
-        expect(res.status).to.be.eq(200);
-        expect(res.body).to.be.deep.eq({
-          ...allSales, saleDate: res.body.saleDate,
+      .then(({ status, body }) => {
+        expect(status).to.be.eq(200);
+        expect(body).to.be.deep.eq({
+          ...allSales,
+          saleDate: body.saleDate,
+          id: createdSale.body[0].saleId,
+          products: allSales.products.map((elem) => ({
+            ...elem,
+            salesProducts: {
+              ...elem.salesProducts,
+              saleId: createdSale.body[0].saleId,
+            }
+          })),
         });
       });
   });
