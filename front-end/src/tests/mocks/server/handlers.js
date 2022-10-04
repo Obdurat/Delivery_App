@@ -14,6 +14,7 @@ import { orders, orderDetails } from '../sellerMock';
 const BASE_URL = 'http://localhost:3001';
 const code = {
   OK: 200,
+  CREATED: 201,
 };
 
 const handlers = [
@@ -22,7 +23,7 @@ const handlers = [
     ctx.json(getUser()),
   )),
   rest.post(`${BASE_URL}/register`, (_req, res, ctx) => res(
-    ctx.status(code.OK),
+    ctx.status(code.CREATED),
     ctx.json(response),
   )),
   rest.post(`${BASE_URL}/products`, (_req, res, ctx) => res(
@@ -38,7 +39,7 @@ const handlers = [
     ctx.json(users),
   )),
   rest.post(`${BASE_URL}/customer/checkout`, (_req, res, ctx) => res(
-    ctx.status(code.OK),
+    ctx.status(code.CREATED),
     ctx.json(checkoutResponse),
   )),
   rest.get(`${BASE_URL}/customer/sales`, (_req, res, ctx) => res(
