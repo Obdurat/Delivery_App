@@ -4,6 +4,7 @@ import allUsers from '../adminMock';
 import sales from '../customerMock';
 import products from '../productsMock';
 import { response } from '../registerMock';
+import { orders, orderDetails } from '../sellerMock';
 
 const BASE_URL = 'http://localhost:3001';
 const code = {
@@ -30,6 +31,14 @@ const handlers = [
   rest.get(`${BASE_URL}/customer/sales`, (_req, res, ctx) => res(
     ctx.status(code.OK),
     ctx.json(sales),
+  )),
+  rest.get(`${BASE_URL}/seller/orders`, (_req, res, ctx) => res(
+    ctx.status(code.OK),
+    ctx.json(orders),
+  )),
+  rest.get(`${BASE_URL}/seller/orders/:id`, (_req, res, ctx) => res(
+    ctx.status(code.OK),
+    ctx.json(orderDetails),
   )),
 ];
 

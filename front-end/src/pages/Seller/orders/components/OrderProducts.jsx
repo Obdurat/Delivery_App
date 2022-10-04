@@ -39,14 +39,5 @@ export default function OrderProducts({ products }) {
 }
 
 OrderProducts.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    price: PropTypes.number,
-    salesProducts: PropTypes.shape({
-      saleId: PropTypes.number,
-      productId: PropTypes.number,
-      quantity: PropTypes.number,
-    }),
-  })).isRequired,
-};
+  products: PropTypes.array,
+}.isRequired;
