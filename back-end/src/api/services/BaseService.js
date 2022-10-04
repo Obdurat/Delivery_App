@@ -40,13 +40,11 @@ class BaseService {
 
     async update(id, body) {
         const request = await this.model.update(body, { where: { id } });
-        if (!request) throw new CustomError(`${this.model.tableName} does not exist`);
         return request;
     }
 
     async delete(id) {
         const request = await this.model.findOne({ where: { id } });
-        if (!request) throw new CustomError(`${this.model.tableName} does not exist`);
         request.destroy(); // Usando a mesma instancia que o find trouxe para apagar ela da DB
         return ({ ...request.dataValues, status: 'Deleted Sucessfully' });
     }
